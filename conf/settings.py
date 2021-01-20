@@ -29,7 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     # custom apps
-    'main.apps.MainConfig', 
+    'main.apps.MainConfig',
+    # vendors apps
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -112,3 +114,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = "/Users/roma/PycharmProjects/ibrg/static"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# CKEditor editor
+CKEDITOR_UPLOAD_PATH = "uploads/"
