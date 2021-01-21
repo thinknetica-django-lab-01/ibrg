@@ -13,7 +13,7 @@ SECRET_KEY = 'sajp-3&8i5pqyu*!pm__=us4yc*8k+ke=v=_gu%upp6$6(u63z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 SITE_ID = 1
 # Application definition
@@ -114,11 +114,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = '/Users/roma/PycharmProjects/ibrg/static'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    '/Users/roma/PycharmProjects/ibrg/static',
-]
+if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static',
+        'static/',
+    ]
+else:
+    STATIC_ROOT = BASE_DIR / 'static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
