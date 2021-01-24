@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from .constants import ADVERT_TYPE, PROFILE_TYPE, HOUSE_TYPE
+from .constants import ADVERT_TYPE, PROFILE_TYPE, BUILDING_TYPE
 
 User = get_user_model()
 
@@ -68,6 +68,12 @@ class Advert(models.Model):
     price = models.IntegerField(verbose_name='Цена')
     area = models.IntegerField(verbose_name='Общая площадь')
     year = models.IntegerField(verbose_name='Год постройки')
+    building_type =  models.CharField(
+        max_length=30,
+        choices=BUILDING_TYPE,
+        default=None,
+        verbose_name='Тип дома'
+    )
 
     def __str__(self):
         return self.advert_title
@@ -87,14 +93,9 @@ class Apartment(Advert):
 
 
 class House(Advert):
-    ''' Модель квартиры '''
-    house_type = models.CharField(
-        max_length=10,
-        choices=HOUSE_TYPE,
-        default=None,
-        verbose_name='тип дома'
-    )
-    garage = models.IntegerField(default=0, verbose_name='Гараж')
+    ''' Модель дома '''
+    garage = models.BooleanField(default=False, verbose_name='Гараж')
+    plot = models.FloatField(default=0.00, verbose_name="Участок")
 
     class Meta:
         verbose_name = 'Дом'
