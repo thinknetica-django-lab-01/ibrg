@@ -1,22 +1,18 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-
+from .constants import ADVERT_TYPE, PROFILE_TYPE, HOUSE_TYPE
 
 User = get_user_model()
 
 
 class Customer(models.Model):
-    """
+    '''
         Модель клиента (пользователь сайта) который может
         быть в роли продавца/покупателя, арендатора/съемщика
-    """
-    PROFILE_TYPE = [
-        ('realtor', 'риелтор'),
-        ('company', 'агентство'),
-        ('developer', 'застройщик'),
-        ('owner', 'собственник'),
-    ]
-    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+    '''
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE,
+        verbose_name='Пользователь')
     profile_type = models.CharField(
         max_length=20,
         choices=PROFILE_TYPE,
@@ -24,30 +20,53 @@ class Customer(models.Model):
     )
     phone = models.CharField(max_length=20, verbose_name='Номер телефона', null=True, blank=True)
 
+    class Meta:
+        verbose_name = 'Клиента'
+        verbose_name_plural = 'Клиенты'
+
+    def __str__(self):
+        return self.user.username
+
 
 class Category(models.Model):
-    """ Модель категорий недвижимости """
+    ''' Модель категорий недвижимости '''
     category_title = models.CharField(max_length=100)
     category_slug = models.SlugField(unique=True)
+
+    class Meta:
+        verbose_name = 'Категорию'
+        verbose_name_plural = 'Категории'
 
     def __str__(self):
         return self.category_title
 
 
 class Advert(models.Model):
-    """ Модель объявления """
+    ''' Модель объявления '''
 
     class Meta:
         abstract = True
 
-    advert_title = models.CharField(max_length=100, null=True, )
-    advert_slug = models.SlugField(unique=True)
-    advert_owner = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name="Владелец объявления")
-    advert_category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE)
-    address = models.CharField(max_length=255, verbose_name="Адрес дома")
+    advert_title = models.CharField(
+        max_length=100,
+        verbose_name='Наименование',
+        null=True, blank=True)
+    advert_slug = models.SlugField(unique=True, verbose_name='ЧПУ')
+    advert_owner = models.ForeignKey(
+        User, on_delete=models.CASCADE,
+        verbose_name='Владелец объявления',
+        null=True, blank=True)
+    advert_category = models.ForeignKey(
+        Category, on_delete=models.CASCADE,
+        verbose_name='Категория',
+        null=True, blank=True)
+    address = models.CharField(
+        max_length=255,
+        verbose_name='Адрес дома',
+        null=True, blank=True)
     rooms = models.IntegerField(verbose_name='Количество комнат')
     price = models.IntegerField(verbose_name='Цена')
-    area = models.IntegerField(verbose_name="Общая площадь")
+    area = models.IntegerField(verbose_name='Общая площадь')
     year = models.IntegerField(verbose_name='Год постройки')
 
     def __str__(self):
@@ -55,29 +74,31 @@ class Advert(models.Model):
 
 
 class Apartment(Advert):
-    """ Модель квартиры """
-    build_level = models.IntegerField(default=1, verbose_name='Количество этажей дома')
+    ''' Модель квартиры '''
+    floors = models.IntegerField(default=1, verbose_name='Этажность дома')
     apartment_floor = models.IntegerField(default=1, verbose_name='Номер этажа')
 
+    class Meta:
+        verbose_name = 'Квартиру'
+        verbose_name_plural = 'Квартиры'
+
     def __str__(self):
-        return f"{self.advert_category}, {self.advert_title}"
+        return f'{self.advert_category}, {self.advert_title}'
 
 
 class House(Advert):
-    """ Модель квартиры """
-    HOUSE_TYPE = [
-        ('house', 'дом'),
-        ('cottage', 'коттедж')
-    ]
+    ''' Модель квартиры '''
     house_type = models.CharField(
         max_length=10,
         choices=HOUSE_TYPE,
         default=None,
+        verbose_name='тип дома'
     )
     garage = models.IntegerField(default=0, verbose_name='Гараж')
 
+    class Meta:
+        verbose_name = 'Дом'
+        verbose_name_plural = 'Дома'
 
     def __str__(self):
-        return f"{self.advert_category}, {self.advert_title}"
-
-
+        return f'{self.advert_category}, {self.advert_title}'
