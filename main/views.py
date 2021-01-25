@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+
+def index(request):
+    turn_on_block =  False
+    return render(request, 'index.html', {'turn_on_block': turn_on_block,})
