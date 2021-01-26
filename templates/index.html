@@ -6,7 +6,8 @@
 
 
 {% block content %}
-
+    {% include 'components/header.html' %}
+    <div class="uk-container uk-margin-top">
     {% if turn_on_block %}
         <article class="uk-article">
             <h1 class="uk-article-title"><a class="uk-link-reset" href="">Heading</a></h1>
@@ -22,6 +23,7 @@
                     </div>
                 </div>
         </article>
+        </div>
     {% else %}
         <h2><em>«Если у тебя есть посох, я тебе его дам. Если у тебя нет посоха, — я его у тебя заберу»</em></h2>
     {% endif %}
