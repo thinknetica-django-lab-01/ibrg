@@ -10,30 +10,11 @@
 </head>
 <body>
 
-<nav class="uk-navbar-container" uk-navbar>
-    <div class="uk-navbar-left">
+    {% include 'components/navigation.html' %}
 
-        <ul class="uk-navbar-nav">
-            <li><a  href="/">Главная</a></li>
-            <li><a  href="/about/">Про Компанию</a></li>
-            <li><a  href="/contact/">Контакты</a></li>
-        </ul>
+    {% block content %}{% endblock content %}
 
-        <ul>
-            <li>
-                Здравствуй, {{ user.username }}
-            </li>
-        </ul>
-
-    </div>
-</nav>
-
-<div class="uk-container">
-    <div class="uk-section uk-text-center">
-        {% block content %}{% endblock content %}
-    </div>
-</div>
-<script src="{% static 'js/uikit.min.js' %}"></script>
-<script src="{% static 'js/uikit-icons.min.js' %}"></script>
+    <script src="{% static 'js/uikit.min.js' %}"></script>
+    <script src="{% static 'js/uikit-icons.min.js' %}"></script>
 </body>
 </html>
