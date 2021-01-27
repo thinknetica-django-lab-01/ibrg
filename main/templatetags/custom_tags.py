@@ -10,6 +10,6 @@ def current_date(format_string):
     return datetime.datetime.utcnow().strftime(format_string)
 
 
-@register.simple_tag
+@register.filter(name='reverse_string')
 def reverse_string(string):
     return string[::-1]

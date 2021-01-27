@@ -13,7 +13,7 @@
     {% if turn_on_block %}
         <article class="uk-article">
             <h1 class="uk-article-title" style="color: red"><a class="uk-link-reset" href="">
-                {% reverse_string  'Привет Django!'  %}
+                {{ text|reverse_string  }}
             </a></h1>
             <p class="uk-article-meta uk-text-success">{%  current_date "%A %d. %B %Y %H:%m" %}. Posted in <a href="#">Blog</a></p>
             <p class="uk-text-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
