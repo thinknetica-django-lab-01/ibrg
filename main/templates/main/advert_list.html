@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Все объявления
+{% endblock %}
+
+{% block content %}
+    <div class="uk-container uk-container-large uk-margin-top">
+        <div class="uk-child-width-1-3@m uk-text-center" uk-grid>
+        {% for object in object_list %}
+            {% include 'components/card.html' %}
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

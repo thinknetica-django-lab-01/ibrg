@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ object }}
+{% endblock %}
+
+{% block content %}
+    <div class="uk-container  uk-margin-top">
+        <div class=" " uk-grid>
+            <div class="uk-width-1-1@s uk-width-expand@m ">
+                <article class="uk-article uk-padding">
+
+                    <h1 class="uk-article-title">
+                        {{ object.advert_title|capfirst }}
+                    </h1>
+
+                    <p class="uk-article-meta">Written by <a href="#">Super User</a> on 12 April 2012. Posted in <a
+                            href="#">Blog</a></p>
+
+                    <p class="uk-text-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip.</p>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+
+                    <div class="" style="border:1px solid #808080">
+                        <table class="uk-table uk-width-1-2">
+
+                            <thead>
+                            <tr>
+                                <th> Общая информация</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>Год постройки:</td>
+                                <td>{{ object.year }}</td>
+                            </tr>
+                            <tr>
+                                <td>Общая площадь:</td>
+                                <td>{{ object.area }}</td>
+                            </tr>
+                            <tr>
+                                <td>Тип дома:</td>
+                                <td>{{ object.get_building_type_display }}</td>
+                            </tr>
+                            {% if object.apartment.floors != '' %}
+                            <tr>
+                                <td>Этажность дома:</td>
+                                <td>{{ object.apartment.floors }}</td>
+                            </tr>
+                            {% endif %}
+                            {% if object.apartment.apartment_floor %}
+                            <tr>
+                                <td>Этаж квартиры:</td>
+                                <td>{{ object.apartment.apartment_floor }}</td>
+                            </tr>
+                            {% endif %}
+                            {% if object.house.garage   %}
+                            <tr>
+                                <td>Гараж:</td>
+                                <td>Есть</td>
+                            </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <div class="uk-card uk-card-default uk-margin-top">
+
+
+                </div>
+
+            </div>
+
+            <aside class="uk-card uk-card-body uk-card-default uk-width-1-4@m">
+                <h2>${{ object.price }} <span
+                        class="uk-text-small">${{ object.price_per_square_meter }}/м<sup>2</sup></span></h2>
+                <hr>
+                {{ object.owner }}
+            </aside>
+        </div>
+    </div>
+{% endblock %}
