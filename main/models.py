@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse
+
 from .constants import ADVERT_TYPE, PROFILE_TYPE, BUILDING_TYPE
 
 User = get_user_model()
@@ -25,7 +27,7 @@ class Customer(models.Model):
         verbose_name_plural = 'Клиенты'
 
     def __str__(self):
-        return self.user.username
+        return self.user
 
 
 class Category(models.Model):
@@ -44,14 +46,11 @@ class Category(models.Model):
 class Advert(models.Model):
     ''' Модель объявления '''
 
-    class Meta:
-        abstract = True
-
     advert_title = models.CharField(
         max_length=100,
         verbose_name='Наименование',
         null=True, blank=True)
-    advert_slug = models.SlugField(unique=True, verbose_name='ЧПУ')
+    slug = models.SlugField(unique=True, verbose_name='ЧПУ')
     advert_owner = models.ForeignKey(
         User, on_delete=models.CASCADE,
         verbose_name='Владелец объявления',
@@ -75,21 +74,31 @@ class Advert(models.Model):
         verbose_name='Тип дома'
     )
 
+    class Meta:
+        verbose_name = 'Объявление'
+        verbose_name_plural = 'Объявления'
+
     def __str__(self):
         return self.advert_title
 
+    def get_absolute_url(self):
+        return reverse('advert-detail', kwargs={'pk': self.pk})
+
+    @property
+    def price_per_square_meter(self) -> float:
+        return round(self.price / self.area, 2)
 
 class Apartment(Advert):
     ''' Модель квартиры '''
-    floors = models.IntegerField(default=1, verbose_name='Этажность дома')
-    apartment_floor = models.IntegerField(default=1, verbose_name='Номер этажа')
+    floors = models.PositiveIntegerField(default=1, verbose_name='Этажность дома')
+    apartment_floor = models.PositiveIntegerField(default=1,  verbose_name='Номер этажа')
 
     class Meta:
         verbose_name = 'Квартиру'
         verbose_name_plural = 'Квартиры'
 
     def __str__(self):
-        return f'{self.advert_category}, {self.advert_title}'
+        return self.advert_title
 
 
 class House(Advert):
@@ -102,4 +111,4 @@ class House(Advert):
         verbose_name_plural = 'Дома'
 
     def __str__(self):
-        return f'{self.advert_category}, {self.advert_title}'
+        return self.advert_title
