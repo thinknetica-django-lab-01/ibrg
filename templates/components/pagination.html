@@ -1,0 +1,16 @@
+<ul class="uk-pagination uk-margin-top uk-padding-small uk-text-large uk-background-secondary uk-light uk-flex-center">
+
+     {% if page_obj.has_previous %}
+           <li><a href="?page={{ page_obj.paginator.num_pages }}"><span uk-pagination-previous></span></a></li>
+        {% endif %}
+
+        {%  for page in page_obj.paginator.page_range  %}
+            {% if page %}
+                <li><a href="?page={{page}}">{{  page }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}"><span uk-pagination-next></span></a></li>
+        {% endif %}
+</ul>

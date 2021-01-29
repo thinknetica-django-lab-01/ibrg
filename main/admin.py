@@ -22,3 +22,4 @@ admin.site.register(FlatPage, FlatPageAdmin)
 admin.site.register(Advert)
 admin.site.register(Apartment)
 admin.site.register(House)
+

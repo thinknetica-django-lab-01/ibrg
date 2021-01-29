@@ -6,6 +6,7 @@ from .models import Advert
 
 class AdvertListView(ListView):
     model = Advert
+    paginate_by = 10
     template_name = 'main/advert_list.html'
 
 
