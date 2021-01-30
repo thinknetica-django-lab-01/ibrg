@@ -79,7 +79,7 @@ class Advert(models.Model):
         verbose_name_plural = 'Объявления'
 
     def __str__(self):
-        return self.advert_title
+        return f"{self.advert_title}, {self.rooms}"
 
     def get_absolute_url(self):
         return reverse('advert-detail', kwargs={'pk': self.pk})
