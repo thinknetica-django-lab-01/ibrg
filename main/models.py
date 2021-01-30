@@ -1,24 +1,26 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
-from .constants import ADVERT_TYPE, PROFILE_TYPE, BUILDING_TYPE
+from .constants import PROFILE_TYPE, BUILDING_TYPE
 
 User = get_user_model()
 
 
 class Customer(models.Model):
-    '''
+    """
         Модель клиента (пользователь сайта) который может
         быть в роли продавца/покупателя, арендатора/съемщика
-    '''
+    """
     user = models.ForeignKey(
         User, on_delete=models.CASCADE,
         verbose_name='Пользователь')
     profile_type = models.CharField(
         max_length=20,
         choices=PROFILE_TYPE,
-        default=None,
+        null=True, blank=True
     )
     phone = models.CharField(max_length=20, verbose_name='Номер телефона', null=True, blank=True)
 
@@ -27,11 +29,18 @@ class Customer(models.Model):
         verbose_name_plural = 'Клиенты'
 
     def __str__(self):
-        return self.user
+        return self.user.username
+
+
+@receiver(post_save, sender=User)
+def create_customer_profile(sender, instance, created, **kwargs):
+    if created:
+        Customer.objects.create(user=instance)
+
 
 
 class Category(models.Model):
-    ''' Модель категорий недвижимости '''
+    """ Модель категорий недвижимости """
     category_title = models.CharField(max_length=100)
     category_slug = models.SlugField(unique=True)
 
@@ -44,8 +53,7 @@ class Category(models.Model):
 
 
 class Advert(models.Model):
-    ''' Модель объявления '''
-
+    """ Модель объявления """
     advert_title = models.CharField(
         max_length=100,
         verbose_name='Наименование',
@@ -67,7 +75,7 @@ class Advert(models.Model):
     price = models.IntegerField(verbose_name='Цена')
     area = models.IntegerField(verbose_name='Общая площадь')
     year = models.IntegerField(verbose_name='Год постройки')
-    building_type =  models.CharField(
+    building_type = models.CharField(
         max_length=30,
         choices=BUILDING_TYPE,
         default=None,
@@ -88,10 +96,11 @@ class Advert(models.Model):
     def price_per_square_meter(self) -> float:
         return round(self.price / self.area, 2)
 
+
 class Apartment(Advert):
-    ''' Модель квартиры '''
+    """ Модель квартиры """
     floors = models.PositiveIntegerField(default=1, verbose_name='Этажность дома')
-    apartment_floor = models.PositiveIntegerField(default=1,  verbose_name='Номер этажа')
+    apartment_floor = models.PositiveIntegerField(default=1, verbose_name='Номер этажа')
 
     class Meta:
         verbose_name = 'Квартиру'
@@ -102,7 +111,7 @@ class Apartment(Advert):
 
 
 class House(Advert):
-    ''' Модель дома '''
+    """ Модель дома """
     garage = models.BooleanField(default=False, verbose_name='Гараж')
     plot = models.FloatField(default=0.00, verbose_name="Участок")
 

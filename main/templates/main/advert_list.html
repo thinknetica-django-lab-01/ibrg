@@ -1,13 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}
-
-    {% if  category_slug %}
-        {{ category_slug }}
-        {% else %}
-        Все объявления
-    {% endif %}
-{% endblock %}
+{% block title %}Все объявления{% endblock %}
 
 {% block content %}
     <div class="uk-container uk-container-large uk-margin-top">

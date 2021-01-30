@@ -5,7 +5,7 @@ from django.contrib.flatpages.models import FlatPage
 from ckeditor.widgets import CKEditorWidget
 
 
-from .models import Advert, Apartment, House, Category
+from .models import Advert, Apartment, House, Category, Customer
 
 
 
@@ -17,7 +17,7 @@ class FlatPageAdmin(FlatPageAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields= {'category_slug':('category_title',)}
-    
+
 
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageAdmin)
@@ -26,3 +26,4 @@ admin.site.register(Advert)
 admin.site.register(Apartment)
 admin.site.register(House)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Customer)
