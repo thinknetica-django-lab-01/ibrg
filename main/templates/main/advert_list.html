@@ -4,8 +4,7 @@
 
 {% block content %}
     <div class="uk-container uk-container-large uk-margin-top">
-
-                <h4>Рекомендуем посмотреть</h4>
+        <h4>Рекомендуем посмотреть</h4>
         <ul class="uk-subnav uk-subnav-pill">
         <li class="{% if request.path == '/adverts/' %} uk-active {% endif %}">
             <a href="{% url 'adverts-list'  %}">Все</a> </li>

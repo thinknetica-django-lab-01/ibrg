@@ -17,6 +17,16 @@
         <ul class="uk-navbar-nav">
             {% if user.is_authenticated %}
             <li>
+                <a href="">Разместить Объявление</a>
+                <div uk-dropdown>
+                    <ul class="uk-nav uk-dropdown-nav">
+                        <li><a href="{% url 'add_apartment' %}">Квартира</a></li>
+                        <li class="uk-nav-divider"></li>
+                        <li><a href="{% url 'add_house' %}">Дом / Котедж</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
                 <a href="">Здравствуй, <b>{{ user.username }}</b></a>
             </li>
                 {% else %}
