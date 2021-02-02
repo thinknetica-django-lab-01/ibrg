@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}  Профиль {{ request.user.username }}{% endblock %}
+
+{% block content %}
+    Welcome
+    {{ object.user.first_name}}
+
+
+{% endblock %}

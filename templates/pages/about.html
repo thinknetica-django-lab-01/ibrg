@@ -5,6 +5,9 @@
 {%endblock title %}
 
  {% block content %}
-    <h1>{{ flatpage.title }}</h1>
-    <h2><em>{{ flatpage.content|linebreaks }} </em></h2>
+     <div class="uk-container">
+        <h2>{{ flatpage.title }}</h2>
+         <hr>
+        {{ flatpage.content }}
+     </div>
 {% endblock content%}

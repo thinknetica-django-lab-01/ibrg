@@ -13,9 +13,8 @@
 <body>
 
     {% include 'components/navigation.html' %}
-    <div class="uk-container">
     {% block content %}{% endblock content %}
-</div>
+
     <script src="{% static 'js/uikit.min.js' %}"></script>
     <script src="{% static 'js/uikit-icons.min.js' %}"></script>
 </body>

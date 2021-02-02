@@ -1,5 +1,6 @@
 {% if page_obj.has_other_pages %}
-<ul class="uk-pagination uk-margin-top uk-padding-small uk-text-large uk-background-secondary uk-light uk-flex-center">
+<ul class="uk-pagination uk-position-bottom uk-position-fixed uk-margin-remove-bottom uk-text-large
+ uk-background-secondary uk-light uk-flex-center uk-animation-slide-bottom-medium">
 
     {% if page_obj.has_previous %}
     <li><a href="?page={{ page_obj.paginator.num_pages }}"><span uk-pagination-previous></span></a></li>

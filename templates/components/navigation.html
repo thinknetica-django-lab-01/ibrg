@@ -6,10 +6,6 @@
             <li><a  href="/about/">Про Компанию</a></li>
             <li><a  href="/contact/">Контакты</a></li>
             <li><a  href="{% url 'adverts-list' %}">Объявления</a></li>
-
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'update_profile' request.user.id %}">Обновить Профль</a></li>
-            {% endif %}
         </ul>
     </div>
 
@@ -17,7 +13,7 @@
         <ul class="uk-navbar-nav">
             {% if user.is_authenticated %}
             <li>
-                <a href="">Разместить Объявление</a>
+                <a href="#">Разместить Объявление</a>
                 <div uk-dropdown>
                     <ul class="uk-nav uk-dropdown-nav">
                         <li><a href="{% url 'add_apartment' %}">Квартира</a></li>
@@ -27,7 +23,16 @@
                 </div>
             </li>
             <li>
-                <a href="">Здравствуй, <b>{{ user.username }}</b></a>
+                <a href="#">Здравствуй, <b>{{ user.username }}</b></a>
+                <div uk-dropdown>
+                    <ul class="uk-nav uk-dropdown-nav">
+                        <li><a href="{% url 'profile' request.user.id %}">Мой Профль</a></li>
+                        <li class="uk-nav-divider"></li>
+                        <li><a href="{% url 'update_profile' request.user.id %}">Обновить Профль</a></li>
+                        <li class="uk-nav-divider"></li>
+                        <li><a href="/admin/logout">Выйти</a></li>
+                    </ul>
+                </div>
             </li>
                 {% else %}
                 <li><a href="/admin/login/">Войти</a></li>
