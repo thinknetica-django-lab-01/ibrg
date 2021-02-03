@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import include, path
 
-from main.views import index
 
 urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
@@ -10,6 +9,5 @@ urlpatterns = [
     # accounts
     path('accounts/', include('django.contrib.auth.urls')),
     # main
-    path('', index, name='index'),
-    path('adverts/', include('main.urls')),
+    path('', include('main.urls')),
 ]
