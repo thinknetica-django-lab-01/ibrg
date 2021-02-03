@@ -132,5 +132,6 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # CKEditor editor
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
-
-LOGIN_URL = '/admin/login/' # TODO изменить после реализации регистрации и авторизации пользователя
+# Registration
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'

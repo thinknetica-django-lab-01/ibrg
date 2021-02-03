@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
+
 
 from .models import Advert, Apartment, House, Customer, User
 from .forms import ProfileForm
@@ -25,7 +28,7 @@ class AdvertDetailView(DetailView):
 
 class ApartmentCreateView(CreateView):
     model = Apartment
-    template_name = 'main/forms.html'
+    template_name = 'components/forms.html'
     fields = '__all__'
 
     def get_context_data(self, **kwargs):
@@ -38,7 +41,7 @@ class ApartmentCreateView(CreateView):
 
 class HouseCreateView(CreateView):
     model = House
-    template_name = 'main/forms.html'
+    template_name = 'components/forms.html'
     fields = '__all__'
 
     def get_context_data(self, **kwargs):
@@ -47,6 +50,12 @@ class HouseCreateView(CreateView):
         # Add in a QuerySet of all the books
         context['title'] = "Новое объявление по продаже дома"
         return context
+
+class Login(LoginView):
+
+    def get_success_url(self):
+        url = self.get_redirect_url()
+        return reverse('profile', kwargs={'pk': self.request.user.pk})
 
 
 class CustomerProfile(LoginRequiredMixin, DetailView):
@@ -57,7 +66,7 @@ class CustomerProfile(LoginRequiredMixin, DetailView):
 class CustomerProfileUpdate(UpdateView):
     model = User
     form_class = ProfileForm
-    template_name = 'accounts/profile/forms.html'
+    template_name = 'components/forms.html'
     success_url = '/'
 
     def form_valid(self, form):
@@ -69,7 +78,7 @@ class CustomerProfileUpdate(UpdateView):
 
 class AdvertUpdate(UpdateView):
     model = Advert
-    template_name = 'main/forms.html'
+    template_name = 'components/forms.html'
     fields = '__all__'
     success_url = '/'
 

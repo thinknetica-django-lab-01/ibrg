@@ -7,6 +7,9 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('page/', include('django.contrib.flatpages.urls')),
     path('admin/', admin.site.urls),
-    path('adverts/', include('main.urls')),
+    # accounts
+    path('accounts/', include('django.contrib.auth.urls')),
+    # main
     path('', index, name='index'),
+    path('adverts/', include('main.urls')),
 ]

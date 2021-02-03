@@ -30,12 +30,12 @@
                         <li class="uk-nav-divider"></li>
                         <li><a href="{% url 'update_profile' request.user.id %}">Обновить Профль</a></li>
                         <li class="uk-nav-divider"></li>
-                        <li><a href="/admin/logout">Выйти</a></li>
+                        <li><a href="{% url 'logout' %}">Выйти</a></li>
                     </ul>
                 </div>
             </li>
                 {% else %}
-                <li><a href="/admin/login/">Войти</a></li>
+                <li><a href="{% url 'login' %}">Войти</a></li>
             {% endif %}
             <li>
                 <a href=""></a>
