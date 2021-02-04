@@ -32,6 +32,10 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     # vendors apps
     'ckeditor',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +136,9 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # CKEditor editor
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
-# Registration
-LOGIN_URL = 'login'
-LOGOUT_REDIRECT_URL = 'login'
+# django-allauth settings
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+LOGIN_REDIRECT_URL = '/'

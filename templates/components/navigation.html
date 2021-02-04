@@ -1,46 +1,53 @@
-<nav class="uk-navbar-container" uk-navbar>
+<div animation="uk-animation-slide-top" uk-sticky sel-target=".uk-navbar-container">
+    <div class="uk-navbar-container">
+        <div class="uk-container">
+            <nav class="uk-navbar-container" uk-navbar>
 
-    <div class="uk-navbar-left">
-        <ul class="uk-navbar-nav">
-            <li><a  href="/">Главная</a></li>
-            <li><a  href="/about/">Про Компанию</a></li>
-            <li><a  href="/contact/">Контакты</a></li>
-            <li><a  href="{% url 'adverts-list' %}">Объявления</a></li>
-        </ul>
-    </div>
-
-    <div class="uk-navbar-right">
-        <ul class="uk-navbar-nav">
-            {% if user.is_authenticated %}
-            <li>
-                <a href="#">Разместить Объявление</a>
-                <div uk-dropdown>
-                    <ul class="uk-nav uk-dropdown-nav">
-                        <li><a href="{% url 'add_apartment' %}">Квартира</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="{% url 'add_house' %}">Дом / Котедж</a></li>
+                <div class="uk-navbar-left">
+                    <ul class="uk-navbar-nav">
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about/">Про Компанию</a></li>
+                        <li><a href="/contact/">Контакты</a></li>
+                        <li><a href="{% url 'adverts-list' %}">Объявления</a></li>
                     </ul>
                 </div>
-            </li>
-            <li>
-                <a href="#">Здравствуй, <b>{{ user.username }}</b></a>
-                <div uk-dropdown>
-                    <ul class="uk-nav uk-dropdown-nav">
-                        <li><a href="{% url 'profile' request.user.id %}">Мой Профль</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="{% url 'update_profile' request.user.id %}">Обновить Профль</a></li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href="{% url 'logout' %}">Выйти</a></li>
+
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav">
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a href="#">Разместить Объявление</a>
+                                <div uk-dropdown>
+                                    <ul class="uk-nav uk-dropdown-nav">
+                                        <li><a href="{% url 'add_apartment' %}">Квартира</a></li>
+                                        <li class="uk-nav-divider"></li>
+                                        <li><a href="{% url 'add_house' %}">Дом / Котедж</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#">Здравствуй, <b>{{ user.username }}</b></a>
+                                <div uk-dropdown>
+                                    <ul class="uk-nav uk-dropdown-nav">
+                                        <li><a href="{% url 'profile' request.user.id %}">Мой Профль</a></li>
+                                        <li class="uk-nav-divider"></li>
+                                        <li><a href="{% url 'update_profile' %}">Обновить Профль</a>
+                                        </li>
+                                        <li class="uk-nav-divider"></li>
+                                        <li><a href="{% url 'account_logout' %}">Выйти</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li><a href="{% url 'account_login' %}">Войти</a></li>
+                        {% endif %}
+                        <li>
+                            <a href=""></a>
+                        </li>
                     </ul>
                 </div>
-            </li>
-                {% else %}
-                <li><a href="{% url 'login' %}">Войти</a></li>
-            {% endif %}
-            <li>
-                <a href=""></a>
-            </li>
-        </ul>
-    </div>
+            </nav>
 
-</nav>
+        </div>
+    </div>
+</div>

@@ -1,14 +1,14 @@
-from django.shortcuts import render
-from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView
 
 
-from .models import Advert, Apartment, House, Customer, User
-from .forms import ProfileForm
 
+from .models import Advert, Apartment, House, User
+from .forms import ProfileForm, UserForm
 
+# Advert section
 class AdvertListView(ListView):
     model = Advert
     paginate_by = 6
@@ -25,6 +25,18 @@ class AdvertDetailView(DetailView):
     model = Advert
     template_name = 'main/advert_detail.html'
 
+class AdvertUpdate(UpdateView):
+    model = Advert
+    template_name = 'components/forms.html'
+    fields = '__all__'
+    success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['title'] = "Изменения объявления"
+        return context
 
 class ApartmentCreateView(CreateView):
     model = Apartment
@@ -51,45 +63,34 @@ class HouseCreateView(CreateView):
         context['title'] = "Новое объявление по продаже дома"
         return context
 
-class Login(LoginView):
 
-    def get_success_url(self):
-        url = self.get_redirect_url()
-        return reverse('profile', kwargs={'pk': self.request.user.pk})
-
-
+# Account section
 class CustomerProfile(LoginRequiredMixin, DetailView):
-    model = Customer
-    template_name = 'accounts/profile/profile.html'
-
-
-class CustomerProfileUpdate(UpdateView):
     model = User
-    form_class = ProfileForm
-    template_name = 'components/forms.html'
-    success_url = '/'
-
-    def form_valid(self, form):
-        form.save(commit=False)
-        form.instance.user = self.request.user
-        form.save()
-        return super().form_valid(form)
+    template_name = 'account/profile/profile.html'
 
 
-class AdvertUpdate(UpdateView):
-    model = Advert
-    template_name = 'components/forms.html'
-    fields = '__all__'
-    success_url = '/'
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect(f'/accounts/profile/{request.user.id}/')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user)
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        context['title'] = "Изменения объявления"
-        return context
+    return render(request, 'components/forms.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
 
 
+
+# base section
 def index(request):
     turn_on_block = True
     text = 'Лаборатория Django-разработки от школы Thinknetica'

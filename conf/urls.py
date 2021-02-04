@@ -8,8 +8,7 @@ urlpatterns = [
     path('page/', include('django.contrib.flatpages.urls')),
     path('admin/', admin.site.urls),
     # accounts
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('allauth.urls')),
     # main
-    path('', index, name='index'),
-    path('adverts/', include('main.urls')),
+    path('', include('main.urls')),
 ]
