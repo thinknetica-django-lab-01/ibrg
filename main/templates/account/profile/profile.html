@@ -5,8 +5,12 @@
 {% block content %}
 
     <div class="uk-container">
-        <h2>Welcome</h2>
-        Username: {{ object.username }} <br>
+        <h2> Мой Профиль</h2>
+        Логин: {{ object.username }} <br>
+        Имя: {{ object.first_name }} <br>
+        email: {{ object.email }} <br>
+        Телефон: {{ object.profile.phone }} <br>
+    {{ object.groups.all }}
     </div>
 
 {% endblock %}

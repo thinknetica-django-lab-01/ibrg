@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
+from django.contrib.auth.models import Group
 from django.dispatch import receiver
 
 from .constants import PROFILE_TYPE, BUILDING_TYPE
@@ -25,18 +26,19 @@ class Profile(models.Model):
     phone = models.CharField(max_length=20, verbose_name='Номер телефона', null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Клиента'
-        verbose_name_plural = 'Клиенты'
+        verbose_name = 'Профили'
+        verbose_name_plural = 'Профиль'
 
     def __str__(self):
         return self.user.username
 
 
 @receiver(post_save, sender=User)
-def create_customer_profile(sender, instance, created, **kwargs):
+def create_customer_profile(sender, instance, created,  **kwargs):
     if created:
         Profile.objects.create(user=instance)
-
+        instance.email = instance.email
+        instance.groups.add(Group.objects.get(name='common_users'))
 
 
 class Category(models.Model):

@@ -7,15 +7,13 @@ from .views import (
     ApartmentCreateView,
     HouseCreateView,
     AdvertUpdate,
-    CustomerProfile,
+    Profile,
     index)
 
 urlpatterns = [
-
     # Profile
-    path('accounts/profile/<int:pk>/', CustomerProfile.as_view(), name='profile'),
+    path('accounts/profile/',   Profile.as_view(), name='profile'),
     path('accounts/profile/update/', update_profile, name='update_profile'),
-
     # main
     path('', index, name='index'),
     path('adverts/', AdvertListView.as_view(), name='adverts-list'),

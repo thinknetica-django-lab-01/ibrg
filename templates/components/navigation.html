@@ -29,7 +29,7 @@
                                 <a href="#">Здравствуй, <b>{{ user.username }}</b></a>
                                 <div uk-dropdown>
                                     <ul class="uk-nav uk-dropdown-nav">
-                                        <li><a href="{% url 'profile' request.user.id %}">Мой Профль</a></li>
+                                        <li><a href="{% url 'profile' %}">Мой Профль</a></li>
                                         <li class="uk-nav-divider"></li>
                                         <li><a href="{% url 'update_profile' %}">Обновить Профль</a>
                                         </li>
