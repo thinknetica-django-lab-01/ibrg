@@ -14,7 +14,7 @@ urlpatterns = [
 
     # Profile
     path('accounts/profile/<int:pk>/', CustomerProfile.as_view(), name='profile'),
-    path('accounts/profile/pdate/', update_profile, name='update_profile'),
+    path('accounts/profile/update/', update_profile, name='update_profile'),
 
     # main
     path('', index, name='index'),
