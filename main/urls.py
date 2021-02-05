@@ -3,22 +3,27 @@ from django.urls import path
 from .views import (
     AdvertListView,
     AdvertDetailView,
-    CustomerProfileUpdate,
+    update_profile,
     ApartmentCreateView,
     HouseCreateView,
     AdvertUpdate,
     CustomerProfile,
+<<<<<<< HEAD
     Login,
+=======
+>>>>>>> 5_2_django_allauth
     index)
 
 urlpatterns = [
 
-    # Registration
-    path('login/', Login.as_view(), name='login'),
     # Profile
     path('accounts/profile/<int:pk>/', CustomerProfile.as_view(), name='profile'),
-    path('accounts/profile/<int:pk>/update/', CustomerProfileUpdate.as_view(), name='update_profile'),
+    path('accounts/profile/update/', update_profile, name='update_profile'),
 
+<<<<<<< HEAD
+=======
+    # main
+>>>>>>> 5_2_django_allauth
     path('', index, name='index'),
     path('adverts/', AdvertListView.as_view(), name='adverts-list'),
     path('detail/<int:pk>/', AdvertDetailView.as_view(), name='advert-detail'),

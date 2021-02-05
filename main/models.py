@@ -9,12 +9,12 @@ from .constants import PROFILE_TYPE, BUILDING_TYPE
 User = get_user_model()
 
 
-class Customer(models.Model):
+class Profile(models.Model):
     """
         Модель клиента (пользователь сайта) который может
         быть в роли продавца/покупателя, арендатора/съемщика
     """
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         User, on_delete=models.CASCADE,
         verbose_name='Пользователь')
     profile_type = models.CharField(
@@ -35,7 +35,7 @@ class Customer(models.Model):
 @receiver(post_save, sender=User)
 def create_customer_profile(sender, instance, created, **kwargs):
     if created:
-        Customer.objects.create(user=instance)
+        Profile.objects.create(user=instance)
 
 
 

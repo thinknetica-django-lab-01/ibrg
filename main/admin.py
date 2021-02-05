@@ -5,7 +5,7 @@ from django.contrib.flatpages.models import FlatPage
 from ckeditor.widgets import CKEditorWidget
 
 
-from .models import Advert, Apartment, House, Category, Customer
+from .models import Advert, Apartment, House, Category, Profile
 
 
 
@@ -26,4 +26,4 @@ admin.site.register(Advert)
 admin.site.register(Apartment)
 admin.site.register(House)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Customer)
+admin.site.register(Profile)
