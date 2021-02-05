@@ -1,6 +1,7 @@
+from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.shortcuts import redirect
-from django.contrib  import messages
+
 
 class RealtorPermissionMixin:
 

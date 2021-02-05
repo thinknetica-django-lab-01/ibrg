@@ -1,12 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, UpdateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
-from .models import Advert, Apartment, House, User
 from .forms import ProfileForm, UserForm
-
-
+from .models import Advert, Apartment, House, User
 # Advert section
 from .permissions import RealtorPermissionMixin
 

@@ -1,14 +1,8 @@
 from django.urls import path
 
-from .views import (
-    AdvertListView,
-    AdvertDetailView,
-    update_profile,
-    ApartmentCreateView,
-    HouseCreateView,
-    AdvertUpdate,
-    Profile,
-    index)
+from .views import (AdvertDetailView, AdvertListView, AdvertUpdate,
+                    ApartmentCreateView, HouseCreateView, Profile, index,
+                    update_profile)
 
 urlpatterns = [
     # Profile
