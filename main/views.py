@@ -8,6 +8,9 @@ from .forms import ProfileForm, UserForm
 
 
 # Advert section
+from .permissions import RealtorPermissionMixin
+
+
 class AdvertListView(ListView):
     model = Advert
     paginate_by = 6
@@ -25,7 +28,7 @@ class AdvertDetailView(DetailView):
     template_name = 'main/advert_detail.html'
 
 
-class AdvertUpdate(UpdateView):
+class AdvertUpdate(RealtorPermissionMixin, UpdateView):
     model = Advert
     template_name = 'components/forms.html'
     fields = '__all__'
@@ -39,7 +42,7 @@ class AdvertUpdate(UpdateView):
         return context
 
 
-class ApartmentCreateView(CreateView):
+class ApartmentCreateView(RealtorPermissionMixin, CreateView):
     model = Apartment
     template_name = 'components/forms.html'
     fields = '__all__'
@@ -52,7 +55,7 @@ class ApartmentCreateView(CreateView):
         return context
 
 
-class HouseCreateView(CreateView):
+class HouseCreateView(RealtorPermissionMixin, CreateView):
     model = House
     template_name = 'components/forms.html'
     fields = '__all__'
