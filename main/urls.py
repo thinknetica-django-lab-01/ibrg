@@ -7,21 +7,27 @@ from .views import (
     ApartmentCreateView,
     HouseCreateView,
     AdvertUpdate,
+<<<<<<< HEAD
     CustomerProfile,
 <<<<<<< HEAD
     Login,
 =======
 >>>>>>> 5_2_django_allauth
+=======
+    Profile,
+>>>>>>> 5_3_group_common_users
     index)
 
 urlpatterns = [
-
     # Profile
-    path('accounts/profile/<int:pk>/', CustomerProfile.as_view(), name='profile'),
+    path('accounts/profile/',   Profile.as_view(), name='profile'),
     path('accounts/profile/update/', update_profile, name='update_profile'),
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 5_3_group_common_users
     # main
 >>>>>>> 5_2_django_allauth
     path('', index, name='index'),

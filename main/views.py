@@ -3,10 +3,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-
-
 from .models import Advert, Apartment, House, User
 from .forms import ProfileForm, UserForm
+
 
 # Advert section
 class AdvertListView(ListView):
@@ -25,6 +24,7 @@ class AdvertDetailView(DetailView):
     model = Advert
     template_name = 'main/advert_detail.html'
 
+
 class AdvertUpdate(UpdateView):
     model = Advert
     template_name = 'components/forms.html'
@@ -37,6 +37,7 @@ class AdvertUpdate(UpdateView):
         # Add in a QuerySet of all the books
         context['title'] = "Изменения объявления"
         return context
+
 
 class ApartmentCreateView(CreateView):
     model = Apartment
@@ -65,9 +66,11 @@ class HouseCreateView(CreateView):
 
 
 # Account section
-class CustomerProfile(LoginRequiredMixin, DetailView):
-    model = User
+class Profile(LoginRequiredMixin, DetailView):
     template_name = 'account/profile/profile.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(User, id=self.request.user.id)
 
 
 @login_required
@@ -78,7 +81,7 @@ def update_profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            return redirect(f'/accounts/profile/{request.user.id}/')
+            return redirect('profile')
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user)
@@ -87,7 +90,6 @@ def update_profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
-
 
 
 # base section
