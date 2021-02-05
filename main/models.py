@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
+from django.core.mail import send_mail
 
 from .constants import BUILDING_TYPE, PROFILE_TYPE
 
@@ -44,6 +45,14 @@ def create_customer_profile(sender, instance, created,  **kwargs):
         Profile.objects.create(user=instance)
         instance.email = instance.email
         instance.groups.add(Group.objects.get(name='common_users'))
+    if instance.email:
+        send_mail(
+            f'Привет марсианин по имени {instance.username}',
+            f'Смысл жизни, {instance.username}, в номере 44.',
+            'from@example.com',
+            [instance.email],
+            fail_silently=False,
+        )
 
 
 class Category(models.Model):
