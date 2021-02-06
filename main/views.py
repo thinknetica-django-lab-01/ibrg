@@ -1,16 +1,14 @@
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import CreateView, DetailView, ListView, UpdateView, View
-
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from .forms import ProfileForm, UserForm
 from .models import Advert, Apartment, House, User
 from .permissions import RealtorPermissionMixin
-# Advert section
-from django.contrib.auth.mixins import PermissionRequiredMixin
 
+
+# Advert section
 class AdvertListView(ListView):
     model = Advert
     paginate_by = 6
