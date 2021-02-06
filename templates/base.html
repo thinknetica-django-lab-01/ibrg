@@ -5,19 +5,37 @@
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/uikit.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/uikit.min.css' %}"/>
     <style>
         body {background: #fcfcfc}
-
-        input{padding: .7em; width:100%}
+        input {padding: .7em; width: 100%}
+        .uk-alert {position: fixed; top: 80px; right: 20%; z-index: 1}
     </style>
 </head>
 <body>
+{% if messages %}
+    {% for message in messages %}
+        <div class="uk-alert uk-width-1-3 uk-align-center
+                {% if message.tags == 'error' %} uk-alert-danger
+                {% else %} uk-alert-success
+                {% endif %}"
+             uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+{% include 'components/navigation.html' %}
+{% block content %}{% endblock content %}
 
-    {% include 'components/navigation.html' %}
-    {% block content %}{% endblock content %}
 
-    <script src="{% static 'js/uikit.min.js' %}"></script>
-    <script src="{% static 'js/uikit-icons.min.js' %}"></script>
+<script src="{% static 'js/uikit.min.js' %}"></script>
+<script src="{% static 'js/uikit-icons.min.js' %}"></script>
+<script>
+    setTimeout(function () {
+        UIkit.alert('.uk-alert').close();
+    }, 2000);
+</script>
+
 </body>
 </html>

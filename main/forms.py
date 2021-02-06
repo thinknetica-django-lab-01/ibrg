@@ -1,9 +1,7 @@
 from django import forms
-from django.forms import inlineformset_factory
 from django.core.exceptions import ValidationError
 
-
-from .models import User, Profile
+from .models import Profile, User
 
 
 class ProfileForm(forms.ModelForm):

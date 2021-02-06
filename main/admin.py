@@ -1,12 +1,10 @@
+from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.contrib import admin
-from django.contrib.flatpages.admin import  FlatpageForm, FlatPageAdmin
+from django.contrib.flatpages.admin import FlatPageAdmin, FlatpageForm
 from django.contrib.flatpages.models import FlatPage
-from ckeditor.widgets import CKEditorWidget
 
-
-from .models import Advert, Apartment, House, Category, Profile
-
+from .models import Advert, Apartment, Category, House, Profile
 
 
 class CkeditorFlatpageForm(FlatpageForm):
