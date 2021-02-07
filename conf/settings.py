@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from email_config import *
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -118,6 +120,18 @@ USE_L10N = True
 USE_TZ = True
 
 
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = EMAIL_HOST
+EMAIL_PORT = EMAIL_PORT
+EMAIL_HOST_USER = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+SERVER_EMAIL = SERVER_EMAIL
+DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -145,6 +159,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 SOCIALACCOUNT_QUERY_EMAIL = True
-SOCIALACCOUNT_EMAIL_REQUIRED = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Привет {{ site_name }}!</title>
+    <style>
+    {% block css %}
+
+        .content {
+            background-color: white;
+            color: #333;
+            margin: 0 25%;
+            }
+
+    {% endblock  %}
+    </style>
+</head>
+<body>
+
+<div class="content">
+{% block content %}{% endblock %}
+
+<em>Thank you for using {{ site_name }}!
+    {{ site_domain }}</em>
+</div>
+
+</body>
+</html>
+
+

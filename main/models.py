@@ -35,26 +35,25 @@ class Profile(models.Model):
         return self.user.username
 
 
-@receiver(post_save, sender=Profile)
-def add_user_to_realtor_group(sender, instance, **kwargs):
-    if instance.profile_type == 'realtor':
-        instance.user.groups.add(Group.objects.get(name='realtor'))
-    instance.user.profile_group = instance.profile_type
-
-
 @receiver(post_save, sender=User)
 def create_customer_profile(sender, instance, created,  **kwargs):
     if created:
         Profile.objects.create(user=instance)
         instance.email = instance.email
         instance.groups.add(Group.objects.get(name='common_users'))
-        send_mail(
-            f'Привет марсианин по имени {instance.username}',
-            f'Смысл жизни, {instance.username}, в номере 42.',
-            'from@example.com',
-            [instance.email],
-            fail_silently=False,
-        )
+        # send_mail(
+        #     f'Привет марсианин по имени {instance.username}',
+        #     f'Смысл жизни, {instance.username}, в номере 42.',
+        #     'from@example.com',
+        #     [instance.email],
+        #     fail_silently=False,
+        # )
+
+@receiver(post_save, sender=Profile)
+def add_user_to_realtor_group(sender, instance, **kwargs):
+    if instance.profile_type == 'realtor':
+        instance.user.groups.add(Group.objects.get(name='realtor'))
+    instance.user.profile_group = instance.profile_type
 
 
 class Category(models.Model):

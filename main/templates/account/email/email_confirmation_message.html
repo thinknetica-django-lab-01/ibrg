@@ -1,0 +1,42 @@
+{% extends "account/email/base_message.html" %}
+{% load account %}
+
+
+{% block css %}
+    {{ block.super }}
+    tr, td {text-align: center;}
+    .button {
+        width: 200px;
+        margin-top: 20px;
+        padding: 1.2em .5em;
+        background-color: rgb(34,143,241);
+        color: white;
+        border: none;
+        cursor: pointer
+    }
+{% endblock %}
+
+{% block content %}
+    {% user_display user as user_display %}
+    <table class="uk-table">
+
+    <tbody>
+      <tr>
+        <th>
+          Вот так встреча! {{ user_display }}
+        </th>
+      </tr>
+        <tr>
+            <td> Мы всегда рады Вам, а особенно когда нажмете кнопочку ниже для подтверждения Вашего  email: </td>
+        </tr>
+        <tr>
+          <td>
+              <br><br>
+            <a href="{{ activate_url }}" class="button">Подтвердить </a>
+          </td>
+        </tr>
+    </tbody>
+</table>
+
+
+{% endblock %}
