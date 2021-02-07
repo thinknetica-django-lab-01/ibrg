@@ -4,6 +4,7 @@ static/
 
 # Files
 .DS_Store
+email_config.py
 
 # gitignore from github
 # Byte-compiled / optimized / DLL files
