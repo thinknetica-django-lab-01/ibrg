@@ -32,6 +32,10 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     # vendors apps
     'ckeditor',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [

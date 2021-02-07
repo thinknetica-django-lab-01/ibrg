@@ -10,6 +10,7 @@ django = "*"
 django-ckeditor = "*"
 faker = "*"
 isort = "*"
+django-allauth = "*"
 
 [requires]
 python_version = "3.9"
