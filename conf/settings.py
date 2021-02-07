@@ -143,8 +143,4 @@ AUTHENTICATION_BACKENDS = [
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_EMAIL_REQUIRED = True
 
-<<<<<<< HEAD
-=======
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
->>>>>>> 6_1_send_email
