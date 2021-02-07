@@ -5,10 +5,10 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from .forms import ProfileForm, UserForm
 from .models import Advert, Apartment, House, User
-# Advert section
 from .permissions import RealtorPermissionMixin
 
 
+# Advert section
 class AdvertListView(ListView):
     model = Advert
     paginate_by = 6
@@ -57,6 +57,7 @@ class HouseCreateView(RealtorPermissionMixin, CreateView):
     model = House
     template_name = 'components/forms.html'
     fields = '__all__'
+    permission_required = ('advert.can_add',)
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context

@@ -4,8 +4,10 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
+from django.core.mail import send_mail
 
 from .constants import BUILDING_TYPE, PROFILE_TYPE
+
 
 User = get_user_model()
 
@@ -34,9 +36,11 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=Profile)
-def add_user_to_realtor_group(sender, instance, created, **kwargs):
-    if instance.user.profile.profile_type == 'realtor':
+def add_user_to_realtor_group(sender, instance, **kwargs):
+    if instance.profile_type == 'realtor':
         instance.user.groups.add(Group.objects.get(name='realtor'))
+    instance.user.profile_group = instance.profile_type
+
 
 @receiver(post_save, sender=User)
 def create_customer_profile(sender, instance, created,  **kwargs):
@@ -44,6 +48,13 @@ def create_customer_profile(sender, instance, created,  **kwargs):
         Profile.objects.create(user=instance)
         instance.email = instance.email
         instance.groups.add(Group.objects.get(name='common_users'))
+        send_mail(
+            f'Привет марсианин по имени {instance.username}',
+            f'Смысл жизни, {instance.username}, в номере 42.',
+            'from@example.com',
+            [instance.email],
+            fail_silently=False,
+        )
 
 
 class Category(models.Model):
