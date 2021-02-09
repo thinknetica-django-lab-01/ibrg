@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import Profile, User
+from .models import Profile, User, Subscribe
 
 
 class ProfileForm(forms.ModelForm):
@@ -23,3 +23,10 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email')
+
+
+class SubscribeForm(forms.ModelForm):
+
+    class Meta:
+        model = Subscribe
+        exclude = ('user',)

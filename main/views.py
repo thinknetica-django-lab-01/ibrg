@@ -1,9 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
-from .forms import ProfileForm, UserForm
+from .forms import ProfileForm, UserForm, SubscribeForm
 from .models import Advert, Apartment, House, User
 from .permissions import RealtorPermissionMixin
 
@@ -99,3 +100,20 @@ def index(request):
     turn_on_block = True
     text = 'Лаборатория Django-разработки от школы Thinknetica'
     return render(request, 'index.html', {'turn_on_block': turn_on_block, 'text': text})
+
+
+
+@login_required()
+def subscribe(request):
+    if request.method == 'POST':
+        form = SubscribeForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = request.user
+            form.active = True
+            form.save()
+            messages.info(request, 'Вы успешно добалены в спам-рассылку')
+            return redirect('/')
+    else:
+        form = SubscribeForm()
+    return render(request, 'main/subscribe.html', {'form': form})

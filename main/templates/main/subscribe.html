@@ -1,0 +1,8 @@
+{% if not request.user.subscribe.active   %}
+    <div class="uk-position uk-position-center-left">
+        <form method="POST" action="{% url 'subscribe' %}">
+            {% csrf_token %}
+            <input type="submit" class="uk-button uk-button-primary"> Подписатся</input>
+        </form>
+    </div>
+{% endif %}

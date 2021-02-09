@@ -1,15 +1,20 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
+from django.core.mail import send_mass_mail, send_mail
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
-from django.core.mail import send_mail
 
+from conf.settings import DEFAULT_FROM_EMAIL
 from .constants import BUILDING_TYPE, PROFILE_TYPE
 
-
 User = get_user_model()
+
+
+class Subscribe(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='subscribe_users')
+    active = models.BooleanField(default=True)
 
 
 class Profile(models.Model):
@@ -36,18 +41,12 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=User)
-def create_customer_profile(sender, instance, created,  **kwargs):
+def create_customer_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
         instance.email = instance.email
         instance.groups.add(Group.objects.get(name='common_users'))
-        # send_mail(
-        #     f'Привет марсианин по имени {instance.username}',
-        #     f'Смысл жизни, {instance.username}, в номере 42.',
-        #     'from@example.com',
-        #     [instance.email],
-        #     fail_silently=False,
-        # )
+
 
 @receiver(post_save, sender=Profile)
 def add_user_to_realtor_group(sender, instance, **kwargs):
@@ -125,6 +124,8 @@ class Apartment(Advert):
 
     def __str__(self):
         return self.advert_title
+
+
 
 
 class House(Advert):

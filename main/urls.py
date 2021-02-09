@@ -2,9 +2,10 @@ from django.urls import path
 
 from .views import (AdvertDetailView, AdvertListView, AdvertUpdate,
                     ApartmentCreateView, HouseCreateView, Profile, index,
-                    update_profile)
+                    update_profile, subscribe)
 
 urlpatterns = [
+    path('subscribe/', subscribe, name='subscribe'),
     # Profile
     path('accounts/profile/',   Profile.as_view(), name='profile'),
     path('accounts/profile/update/', update_profile, name='update_profile'),
