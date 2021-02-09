@@ -9,7 +9,7 @@ from main.models import Subscribe, Apartment, House
 @receiver(post_save, sender=House)
 @receiver(post_save, sender=Apartment)
 def send_email_after_save_new_ad(sender, instance, created, **kwargs):
-    mail_list = [subscribe.user.email for subscribe in Subscribe.objects.select_related('user')]
+    mail_list = Subscribe.objects.values_list('user__email', flat=True)
     from_email = DEFAULT_FROM_EMAIL
     subject = f'На сайте добавлено новый объект {instance.advert_title}'
     message = f'{instance.advert_title} <em>{instance.price} грн'
