@@ -11,6 +11,7 @@ django-ckeditor = "*"
 faker = "*"
 isort = "*"
 django-allauth = "*"
+django-apscheduler = "*"
 
 [requires]
 python_version = "3.9"

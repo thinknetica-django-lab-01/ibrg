@@ -6,3 +6,5 @@ class MainConfig(AppConfig):
 
     def ready(self):
         import main.signals
+        from main.utils import start_job
+        start_job()
