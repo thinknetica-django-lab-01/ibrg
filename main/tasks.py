@@ -1,4 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
+from celery import shared_task
 from django_apscheduler.jobstores import DjangoJobStore
 
 from conf import settings
@@ -10,9 +11,9 @@ def start_job():
     scheduler.add_jobstore(DjangoJobStore(), "default")
     scheduler.add_job(news,
                       'cron',
-                      # day_of_week='thu',
-                      hour=1,
-                      minute=48,
+                      day_of_week='fri',
+                      hour=6,
+                      minute=30,
                       id='news',
                       max_instances=1,
                       replace_existing=True,
@@ -20,6 +21,18 @@ def start_job():
 
     scheduler.start()
 
-    print('+' * 20)
-    print('Start dsfsdgjsdfglkhsdf;lgkh∂')
-    print('+' * 20)
+
+# CELERY TASKS
+@shared_task
+def add(x, y):
+    return x + y
+
+
+@shared_task
+def mul(x, y):
+    return x * y
+
+
+@shared_task
+def xsum(numbers):
+    return sum(numbers)

@@ -12,6 +12,7 @@ faker = "*"
 isort = "*"
 django-allauth = "*"
 django-apscheduler = "*"
+celery = "*"
 
 [requires]
 python_version = "3.9"
