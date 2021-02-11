@@ -13,6 +13,7 @@ isort = "*"
 django-allauth = "*"
 django-apscheduler = "*"
 celery = "*"
+django-redis = "*"
 
 [requires]
 python_version = "3.9"
