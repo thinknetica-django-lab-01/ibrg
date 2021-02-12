@@ -1,5 +1,4 @@
 from apscheduler.schedulers.background import BackgroundScheduler
-from celery import shared_task
 
 from django_apscheduler.jobstores import DjangoJobStore
 from conf import settings
@@ -21,8 +20,3 @@ def start_job():
 
     scheduler.start()
 
-
-# CELERY TASKS
-@shared_task()
-def print_hello():
-    print('Hello')

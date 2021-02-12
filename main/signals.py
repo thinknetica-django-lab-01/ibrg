@@ -1,3 +1,4 @@
+from celery import shared_task
 from django.core.mail import send_mass_mail, EmailMultiAlternatives
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -6,6 +7,9 @@ from conf.settings import DEFAULT_FROM_EMAIL
 from main.models import Subscribe, Advert, Apartment, House
 from django.utils import timezone
 from django.template.loader import render_to_string
+
+from main.celery import app
+
 
 @receiver(post_save, sender=House)
 @receiver(post_save, sender=Apartment)
@@ -23,7 +27,7 @@ def send_email_after_save_new_ad(sender, instance, created, **kwargs):
 
 
 
-
+@app.task
 def news():
     "Оптарвка новый обьявлений подписчикам раз в неделю"
     tm = timezone.now() - timezone.timedelta(days=7)
