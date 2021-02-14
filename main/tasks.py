@@ -1,22 +1,24 @@
-from apscheduler.schedulers.background import BackgroundScheduler
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 
-from django_apscheduler.jobstores import DjangoJobStore
 from conf import settings
-from main.signals import news
+from main.celery import app
+from main.models import Subscribe
 
 
-def start_job():
-    scheduler = BackgroundScheduler(timezone=settings.TIME_ZONE)
-    scheduler.add_jobstore(DjangoJobStore(), "default")
-    scheduler.add_job(news,
-                      'cron',
-                      day_of_week='fri',
-                      hour=6,
-                      minute=30,
-                      id='news',
-                      max_instances=1,
-                      replace_existing=True,
-                      )
+@app.task()
+def newsletter(subject, object_list=None, **kwargs):
+    mail_list = Subscribe.objects.values_list('user__email', flat=True)
+    from_email = settings.DEFAULT_FROM_EMAIL
+    if object_list:
+        context = {'subject':subject, 'object_list': object_list}
+    else:
+        title = kwargs.get('title')
+        price = kwargs['price']
+        context = {'subject': subject, 'title': title, 'price': price}
+    html_content = render_to_string('news/news.html', context=context)
 
-    scheduler.start()
-
+    for email in mail_list:
+        msg = EmailMultiAlternatives(subject, html_content, from_email, [email])
+        msg.content_subtype = 'html'
+        msg.send()
