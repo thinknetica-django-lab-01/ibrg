@@ -18,6 +18,12 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 SITE_ID = 1
+
+# DebugToolbar
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +45,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'django_apscheduler',
-    'django_celery_results'
+    'django_celery_results',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'conf.urls'
@@ -122,16 +129,16 @@ USE_L10N = True
 USE_TZ = True
 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = EMAIL_HOST
-EMAIL_PORT = EMAIL_PORT
-EMAIL_HOST_USER = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
-SERVER_EMAIL = SERVER_EMAIL
-DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = EMAIL_HOST
+# EMAIL_PORT = EMAIL_PORT
+# EMAIL_HOST_USER = EMAIL_HOST_USER
+# EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+# SERVER_EMAIL = SERVER_EMAIL
+# DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -172,12 +179,24 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BROKER_URL = "redis://127.0.0.1:6379/1"
 BROKER_URL = 'redis://localhost:6379'
 
+
+# redis cache
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django_redis.cache.RedisCache',
+#         'OPTIONS': {
+#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+#         },
+#         'LOCATION': CELERY_BROKER_URL
+#     }
+# }
+
+# django cache
 CACHES = {
     'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        },
-        'LOCATION': CELERY_BROKER_URL
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
     }
 }
+
+

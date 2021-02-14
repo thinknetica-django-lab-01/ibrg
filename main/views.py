@@ -2,14 +2,17 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
-from .forms import ProfileForm, UserForm, SubscribeForm
+from .forms import ProfileForm, SubscribeForm, UserForm
 from .models import Advert, Apartment, House, User
 from .permissions import RealtorPermissionMixin
 
 
 # Advert section
+@method_decorator(cache_page(10), name='dispatch')  # TODO: change time
 class AdvertListView(ListView):
     model = Advert
     paginate_by = 6
@@ -21,7 +24,7 @@ class AdvertListView(ListView):
             queryset = queryset.filter(advert_category__category_slug=self.kwargs['category_slug']).order_by('-id')
         return queryset
 
-
+@method_decorator(cache_page(10), name='dispatch')
 class AdvertDetailView(DetailView):
     model = Advert
     template_name = 'main/advert_detail.html'
@@ -69,6 +72,7 @@ class HouseCreateView(RealtorPermissionMixin, CreateView):
 
 
 # Account section
+@method_decorator(cache_page(60 * 5), name='dispatch')  # NEW
 class Profile(LoginRequiredMixin, DetailView):
     template_name = 'account/profile/profile.html'
 
@@ -100,7 +104,6 @@ def index(request):
     turn_on_block = True
     text = 'Лаборатория Django-разработки от школы Thinknetica'
     return render(request, 'index.html', {'turn_on_block': turn_on_block, 'text': text})
-
 
 
 @login_required()
