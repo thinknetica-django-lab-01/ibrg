@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import (AdvertDetailView, AdvertListView, AdvertUpdate,
                     ApartmentCreateView, HouseCreateView, Profile, index,
-                    update_profile, subscribe)
+                    update_profile, subscribe,)
 
 urlpatterns = [
     path('subscribe/', subscribe, name='subscribe'),

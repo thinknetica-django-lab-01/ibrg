@@ -98,6 +98,7 @@ class Advert(models.Model):
         verbose_name='Тип дома'
     )
     created = models.DateTimeField(auto_now=True)
+    views = models.PositiveIntegerField(default=0)
 
     class Meta:
         verbose_name = 'Объявление'

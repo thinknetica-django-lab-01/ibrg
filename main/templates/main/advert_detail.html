@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load cache %}
 {% block title %}
     {{ object }}
 {% endblock %}
@@ -88,6 +88,7 @@
                 <h2>${{ object.price }} <span
                         class="uk-text-small">${{ object.price_per_square_meter }}/м<sup>2</sup></span></h2>
                 <hr>
+                Views: {{ cache_views }}
                 {{ object.owner }}
             </aside>
         </div>

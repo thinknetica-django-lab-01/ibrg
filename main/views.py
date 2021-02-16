@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
@@ -9,25 +10,41 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from .forms import ProfileForm, SubscribeForm, UserForm
 from .models import Advert, Apartment, House, User
 from .permissions import RealtorPermissionMixin
-
+from django.db.models import F
 
 # Advert section
-@method_decorator(cache_page(10), name='dispatch')  # TODO: change time
+
 class AdvertListView(ListView):
     model = Advert
     paginate_by = 6
     template_name = 'main/advert_list.html'
 
     def get_queryset(self):
-        queryset = self.model.objects.all()
+        queryset = cache.get('object_list')
+        if not queryset:
+            queryset = self.model.objects.all()
+            cache.set('object_list', queryset)
         if self.kwargs.get('category_slug'):
+            category = self.kwargs.get('category_slug')
             queryset = queryset.filter(advert_category__category_slug=self.kwargs['category_slug']).order_by('-id')
+            cache.set(f'object_list_{category}', queryset)
         return queryset
 
-@method_decorator(cache_page(10), name='dispatch')
+
 class AdvertDetailView(DetailView):
     model = Advert
     template_name = 'main/advert_detail.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        # send views value to context
+        context['cache_views'] = cache.get_or_set(f'object_viewed_{self.object.pk}', self.object.views, 60)
+        # save view counter
+        self.object.views += 1
+        self.object.save()
+
+        return self.render_to_response(context)
 
 
 class AdvertUpdate(RealtorPermissionMixin, UpdateView):
