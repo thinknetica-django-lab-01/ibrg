@@ -12,10 +12,11 @@ urlpatterns = [
     # main
     path('', index, name='index'),
     path('adverts/', AdvertListView.as_view(), name='adverts-list'),
+    path('<slug:category_slug>/', AdvertListView.as_view(), name='adverts-list'),
     path('detail/<int:pk>/', AdvertDetailView.as_view(), name='advert-detail'),
     path('add/apartment/', ApartmentCreateView.as_view(), name='add_apartment'),
     path('add/house/', HouseCreateView.as_view(), name='add_house'),
     path('update/<slug:slug>/', AdvertUpdate.as_view(), name='update_advert'),
-    path('<slug:category_slug>/', AdvertListView.as_view(), name='adverts-list'),
+
 
 ]

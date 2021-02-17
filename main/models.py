@@ -103,6 +103,7 @@ class Advert(models.Model):
     class Meta:
         verbose_name = 'Объявление'
         verbose_name_plural = 'Объявления'
+        ordering = ['-id']
 
     def __str__(self):
         return f"{self.advert_title}, {self.rooms}"

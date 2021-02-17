@@ -26,7 +26,7 @@ class AdvertListView(ListView):
             cache.set('object_list', queryset)
         if self.kwargs.get('category_slug'):
             category = self.kwargs.get('category_slug')
-            queryset = queryset.filter(advert_category__category_slug=self.kwargs['category_slug']).order_by('-id')
+            queryset = queryset.filter(advert_category__category_slug=self.kwargs['category_slug'])
             cache.set(f'object_list_{category}', queryset)
         return queryset
 
