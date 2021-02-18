@@ -17,6 +17,7 @@ django-redis = "*"
 django-celery-results = "*"
 python-memcached = "*"
 django-debug-toolbar = "*"
+pytest-django = "*"
 
 [requires]
 python_version = "3.9"

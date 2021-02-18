@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import Group
 from django.shortcuts import redirect
 
@@ -15,6 +14,6 @@ class RealtorPermissionMixin:
 
     def dispatch(self, request, *args, **kwargs):
         if not self.has_permission():
-            messages.error(request, "У Вас нет доступа доля данного действия, нужно быть риэлтором.")
+            messages.error(request, "У Вас нет доступа для данного действия, нужно быть риэлтором.")
             return redirect(request.META.get('HTTP_REFERER'))
         return super().dispatch(request, *args, **kwargs)
