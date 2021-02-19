@@ -13,6 +13,14 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='customer',
             name='profile_type',
-            field=models.CharField(blank=True, choices=[('realtor', 'риелтор'), ('company', 'агентство'), ('developer', 'застройщик'), ('owner', 'собственник')], max_length=20, null=True),
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ('realtor', 'риелтор'),
+                    ('company', 'агентство'),
+                    ('developer', 'застройщик'),
+                    ('owner', 'собственник')],
+                max_length=20,
+                null=True),
         ),
     ]

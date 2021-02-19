@@ -16,7 +16,7 @@ PROFILE_TYPE = [
 BUILDING_TYPE = [
     ('0', '----'),
     ('brick', 'кирпичный'),
-    ('monolithic','монолитный'),
+    ('monolithic', 'монолитный'),
     ('wooden', 'деревянный'),
     ('aerated_concrete', 'газобетонный блок'),
     ('foam_concrete', 'пенобетонный блок')

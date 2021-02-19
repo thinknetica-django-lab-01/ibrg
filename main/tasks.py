@@ -13,7 +13,7 @@ def newsletter(subject, object_list=None, **kwargs):
     mail_list = Subscribe.objects.values_list('user__email', flat=True)
     from_email = settings.DEFAULT_FROM_EMAIL
     if object_list:
-        context = {'subject':subject, 'object_list': object_list}
+        context = {'subject': subject, 'object_list': object_list}
     else:
         title = kwargs.get('title')
         price = kwargs['price']
@@ -21,15 +21,19 @@ def newsletter(subject, object_list=None, **kwargs):
     html_content = render_to_string('news/news.html', context=context)
 
     for email in mail_list:
-        msg = EmailMultiAlternatives(subject, html_content, from_email, [email])
+        msg = EmailMultiAlternatives(
+            subject,
+            html_content,
+            from_email,
+            [email])
         msg.content_subtype = 'html'
         msg.send()
-
 
 
 @app.task()
 def news():
     # Отправлять сводку еженедельных подборок товаров через celery
     tm = timezone.now() - timezone.timedelta(days=7)
-    object_list = Advert.objects.filter(created__gte=tm).only('advert_title', 'price')[:9]
-    newsletter(subject='Новое за неделю',object_list = object_list)
+    object_list = Advert.objects.filter(created__gte=tm).only(
+        'advert_title', 'price')[:9]
+    newsletter(subject='Новое за неделю', object_list=object_list)

@@ -14,6 +14,8 @@ class RealtorPermissionMixin:
 
     def dispatch(self, request, *args, **kwargs):
         if not self.has_permission():
-            messages.error(request, "У Вас нет доступа для данного действия, нужно быть риэлтором.")
+            messages.error(
+                request,
+                "У Вас нет доступа, нужно быть риэлтором.")
             return redirect(request.META.get('HTTP_REFERER'))
         return super().dispatch(request, *args, **kwargs)
