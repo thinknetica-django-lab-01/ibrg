@@ -79,6 +79,8 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+docs/_build/doctrees
+docs/_build/html/_static/
 
 # PyBuilder
 target/
@@ -134,3 +136,4 @@ dmypy.json
 .pyre/
 
 
+/docs/_build/html/_static/
