@@ -6,16 +6,16 @@ from .models import Profile, User, Subscribe
 
 class ProfileForm(forms.ModelForm):
     age = forms.IntegerField()
+
     def clean_age(self):
         age = self.cleaned_data['age']
         if age < 18:
             raise ValidationError('Возраст должен быть 18 и старше')
         return age
-    
+
     class Meta:
         model = Profile
         fields = ('profile_type', 'phone')
-
 
 
 class UserForm(forms.ModelForm):

@@ -18,6 +18,7 @@ django-celery-results = "*"
 python-memcached = "*"
 django-debug-toolbar = "*"
 pytest-django = "*"
+flake8 = "*"
 
 [requires]
 python_version = "3.9"

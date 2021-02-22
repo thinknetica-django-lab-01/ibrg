@@ -10,16 +10,17 @@ from .models import Advert, Apartment, Category, House, Profile, Subscribe
 class CkeditorFlatpageForm(FlatpageForm):
     content = forms.CharField(widget=CKEditorWidget())
 
+
 class FlatPageAdmin(FlatPageAdmin):
     form = CkeditorFlatpageForm
 
+
 class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields= {'category_slug':('category_title',)}
+    prepopulated_fields = {'category_slug': ('category_title',)}
 
 
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageAdmin)
-
 admin.site.register(Advert)
 admin.site.register(Apartment)
 admin.site.register(House)

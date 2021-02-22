@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('main', '0001_initial'),
     ]
@@ -13,11 +12,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='apartment',
             name='apartment_floor',
-            field=models.PositiveIntegerField(default=1, verbose_name='Номер этажа'),
+            field=models.PositiveIntegerField(
+                default=1,
+                verbose_name='Номер этажа'),
         ),
         migrations.AlterField(
             model_name='apartment',
             name='floors',
-            field=models.PositiveIntegerField(default=1, verbose_name='Этажность дома'),
+            field=models.PositiveIntegerField(
+                default=1,
+                verbose_name='Этажность дома'),
         ),
     ]

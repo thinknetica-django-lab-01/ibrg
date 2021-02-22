@@ -10,10 +10,9 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from .forms import ProfileForm, SubscribeForm, UserForm
 from .models import Advert, Apartment, House, User
 from .permissions import RealtorPermissionMixin
-from django.db.models import F
+
 
 # Advert section
-
 class AdvertListView(ListView):
     model = Advert
     paginate_by = 6
@@ -26,7 +25,8 @@ class AdvertListView(ListView):
             cache.set('object_list', queryset)
         if self.kwargs.get('category_slug'):
             category = self.kwargs.get('category_slug')
-            queryset = queryset.filter(advert_category__category_slug=self.kwargs['category_slug'])
+            queryset = queryset.filter(
+                advert_category__category_slug=self.kwargs['category_slug'])
             cache.set(f'object_list_{category}', queryset)
         return queryset
 
@@ -39,7 +39,8 @@ class AdvertDetailView(DetailView):
         self.object = self.get_object()
         context = self.get_context_data(object=self.object)
         # send views value to context
-        context['cache_views'] = cache.get_or_set(f'object_viewed_{self.object.pk}', self.object.views, 60)
+        context['cache_views'] = cache.get_or_set(
+            f'object_viewed_{self.object.pk}', self.object.views, 60)
         # save view counter
         self.object.views += 1
         self.object.save()
@@ -120,7 +121,9 @@ def update_profile(request):
 def index(request):
     turn_on_block = True
     text = 'Лаборатория Django-разработки от школы Thinknetica'
-    return render(request, 'index.html', {'turn_on_block': turn_on_block, 'text': text})
+    return render(request, 'index.html', {
+        'turn_on_block': turn_on_block,
+        'text': text})
 
 
 @login_required()

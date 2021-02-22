@@ -1,19 +1,21 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from django.core.mail import send_mass_mail, send_mail
+
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 
-from conf.settings import DEFAULT_FROM_EMAIL
 from .constants import BUILDING_TYPE, PROFILE_TYPE
 
 User = get_user_model()
 
 
 class Subscribe(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='subscribe_users')
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='subscribe_users')
     active = models.BooleanField(default=True)
 
 
@@ -30,7 +32,10 @@ class Profile(models.Model):
         choices=PROFILE_TYPE,
         null=True, blank=True
     )
-    phone = models.CharField(max_length=20, verbose_name='Номер телефона', null=True, blank=True)
+    phone = models.CharField(
+        max_length=20,
+        verbose_name='Номер телефона',
+        null=True, blank=True)
 
     class Meta:
         verbose_name = 'Профили'
@@ -118,8 +123,12 @@ class Advert(models.Model):
 
 class Apartment(Advert):
     """ Модель квартиры """
-    floors = models.PositiveIntegerField(default=1, verbose_name='Этажность дома')
-    apartment_floor = models.PositiveIntegerField(default=1, verbose_name='Номер этажа')
+    floors = models.PositiveIntegerField(
+        default=1,
+        verbose_name='Этажность дома')
+    apartment_floor = models.PositiveIntegerField(
+        default=1,
+        verbose_name='Номер этажа')
 
     class Meta:
         verbose_name = 'Квартиру'
@@ -129,12 +138,14 @@ class Apartment(Advert):
         return self.advert_title
 
 
-
-
 class House(Advert):
     """ Модель дома """
-    garage = models.BooleanField(default=False, verbose_name='Гараж')
-    plot = models.FloatField(default=0.00, verbose_name="Участок")
+    garage = models.BooleanField(
+        default=False,
+        verbose_name='Гараж')
+    plot = models.FloatField(
+        default=0.00,
+        verbose_name="Участок")
 
     class Meta:
         verbose_name = 'Дом'
