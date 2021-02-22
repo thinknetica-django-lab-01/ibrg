@@ -19,6 +19,8 @@ python-memcached = "*"
 django-debug-toolbar = "*"
 pytest-django = "*"
 flake8 = "*"
+django-stubs = "*"
+mypy = "*"
 
 [requires]
 python_version = "3.9"

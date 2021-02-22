@@ -1,14 +1,10 @@
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
-
+from django.contrib.auth.models import Group, User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 
 from .constants import BUILDING_TYPE, PROFILE_TYPE
-
-User = get_user_model()
 
 
 class Subscribe(models.Model):
@@ -46,7 +42,10 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=User)
-def create_customer_profile(sender, instance, created, **kwargs):
+def create_customer_profile(
+        sender: User,
+        instance: User,
+        created, **kwargs) -> None:
     if created:
         Profile.objects.create(user=instance)
         instance.email = instance.email
@@ -54,10 +53,10 @@ def create_customer_profile(sender, instance, created, **kwargs):
 
 
 @receiver(post_save, sender=Profile)
-def add_user_to_realtor_group(sender, instance, **kwargs):
+def add_user_to_realtor_group(sender: Profile,
+                              instance: Profile, **kwargs) -> None:
     if instance.profile_type == 'realtor':
         instance.user.groups.add(Group.objects.get(name='realtor'))
-    instance.user.profile_group = instance.profile_type
 
 
 class Category(models.Model):
@@ -69,7 +68,7 @@ class Category(models.Model):
         verbose_name = 'Категорию'
         verbose_name_plural = 'Категории'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.category_title
 
 
@@ -110,10 +109,10 @@ class Advert(models.Model):
         verbose_name_plural = 'Объявления'
         ordering = ['-id']
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.advert_title}, {self.rooms}"
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse('advert-detail', kwargs={'pk': self.pk})
 
     @property
@@ -134,7 +133,7 @@ class Apartment(Advert):
         verbose_name = 'Квартиру'
         verbose_name_plural = 'Квартиры'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.advert_title
 
 
@@ -151,5 +150,5 @@ class House(Advert):
         verbose_name = 'Дом'
         verbose_name_plural = 'Дома'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.advert_title

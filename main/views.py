@@ -1,7 +1,11 @@
+from typing import Dict, Union
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.cache import cache
+from django.db.models.query import QuerySet
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
@@ -18,8 +22,8 @@ class AdvertListView(ListView):
     paginate_by = 6
     template_name = 'main/advert_list.html'
 
-    def get_queryset(self):
-        queryset = cache.get('object_list')
+    def get_queryset(self) -> QuerySet[Advert]:
+        queryset: 'QuerySet[Advert]' = cache.get('object_list')
         if not queryset:
             queryset = self.model.objects.all()
             cache.set('object_list', queryset)
@@ -35,16 +39,18 @@ class AdvertDetailView(DetailView):
     model = Advert
     template_name = 'main/advert_detail.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request: HttpRequest,
+            *args: object,
+            **kwargs: object) -> HttpResponse:
         self.object = self.get_object()
         context = self.get_context_data(object=self.object)
         # send views value to context
+        # for cache set name, object and time
         context['cache_views'] = cache.get_or_set(
             f'object_viewed_{self.object.pk}', self.object.views, 60)
         # save view counter
         self.object.views += 1
         self.object.save()
-
         return self.render_to_response(context)
 
 
@@ -54,7 +60,7 @@ class AdvertUpdate(RealtorPermissionMixin, UpdateView):
     fields = '__all__'
     success_url = '/'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> Dict[str, object]:
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
@@ -67,7 +73,7 @@ class ApartmentCreateView(RealtorPermissionMixin, CreateView):
     template_name = 'components/forms.html'
     fields = '__all__'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> Dict[str, object]:
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
@@ -81,10 +87,9 @@ class HouseCreateView(RealtorPermissionMixin, CreateView):
     fields = '__all__'
     permission_required = ('advert.can_add',)
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> Dict[str, object]:
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
         context['title'] = "Новое объявление по продаже дома"
         return context
 
@@ -99,7 +104,7 @@ class Profile(LoginRequiredMixin, DetailView):
 
 
 @login_required
-def update_profile(request):
+def update_profile(request) -> HttpResponse:
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
@@ -127,7 +132,8 @@ def index(request):
 
 
 @login_required()
-def subscribe(request):
+def subscribe(request: HttpRequest) -> \
+                Union[HttpResponseRedirect, HttpResponse]:
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
