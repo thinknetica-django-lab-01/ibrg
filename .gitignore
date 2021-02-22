@@ -78,7 +78,10 @@ instance/
 .scrapy
 
 # Sphinx documentation
+docs/_build/html/_static/
 docs/_build/
+docs/_build/doctrees
+
 
 # PyBuilder
 target/
@@ -134,3 +137,4 @@ dmypy.json
 .pyre/
 
 
+/docs/_build/html/_static/
