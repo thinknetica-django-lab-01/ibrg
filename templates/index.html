@@ -16,7 +16,8 @@
                 {{ text|reverse_string  }}
             </a></h1>
             <p class="uk-article-meta uk-text-success">{%  current_date "%A %d. %B %Y %H:%m" %}. Posted in <a href="#">Blog</a></p>
-            <p class="uk-text-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+            <p class="uk-text-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <div class="uk-grid-small uk-child-width-auto" uk-grid>
                     <div>
@@ -31,5 +32,11 @@
     {% else %}
         <h2><em>«Если у тебя есть посох, я тебе его дам. Если у тебя нет посоха, — я его у тебя заберу»</em></h2>
     {% endif %}
-
+{% include 'main/subscribe.html' %}
+    <div class="uk-position-bottom-right">
+    <button class="uk-button uk-button-secondary" type="button">ChatBot</button>
+    <div uk-dropdown="mode: click" >
+        {% include 'chat/chat.html' %}
+    </div>
+</div>
 {% endblock content %}

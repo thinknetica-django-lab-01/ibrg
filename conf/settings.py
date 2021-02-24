@@ -1,7 +1,5 @@
 from pathlib import Path
 
-from email_config import *
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +25,7 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
-    
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,8 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    # custom apps
-    'main.apps.MainConfig',
+
     # vendors apps
     'ckeditor',
     'allauth',
@@ -46,7 +43,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'django_apscheduler',
     'django_celery_results',
+    'channels',
     'debug_toolbar',
+
+    # custom apps
+    'main.apps.MainConfig',
+    'chatbot',
 ]
 
 MIDDLEWARE = [
@@ -128,18 +130,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = EMAIL_HOST
-# EMAIL_PORT = EMAIL_PORT
-# EMAIL_HOST_USER = EMAIL_HOST_USER
-# EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
-# SERVER_EMAIL = SERVER_EMAIL
-# DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -190,3 +181,13 @@ CACHES = {
     }
 }
 
+# Конфигурация Channels
+ASGI_APPLICATION = "conf.asgi.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}

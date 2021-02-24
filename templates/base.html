@@ -28,15 +28,10 @@
 {% include 'components/navigation.html' %}
 {% block content %}{% endblock content %}
 
-{% include 'main/subscribe.html' %}
-
-
 <script src="{% static 'js/uikit.min.js' %}"></script>
 <script src="{% static 'js/uikit-icons.min.js' %}"></script>
 <script>
-    setTimeout(function () {
-        UIkit.alert('.uk-alert').close();
-    }, 2000);
+
 </script>
 
 </body>
