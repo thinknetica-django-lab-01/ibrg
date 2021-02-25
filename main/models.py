@@ -6,6 +6,8 @@ from django.urls import reverse
 
 from .constants import BUILDING_TYPE, PROFILE_TYPE
 
+from functools import wraps
+
 
 class Subscribe(models.Model):
     user = models.OneToOneField(
@@ -41,7 +43,20 @@ class Profile(models.Model):
         return self.user.username
 
 
+def disable_for_loaddata(signal_handler):
+    """
+    Decorator that turns off signal handlers when loading fixture data.
+    """
+    @wraps(signal_handler)
+    def wrapper(*args, **kwargs):
+        if kwargs['raw']:
+            return
+        signal_handler(*args, **kwargs)
+    return wrapper
+
+
 @receiver(post_save, sender=User)
+@disable_for_loaddata
 def create_customer_profile(
         sender: User,
         instance: User,
@@ -53,6 +68,7 @@ def create_customer_profile(
 
 
 @receiver(post_save, sender=Profile)
+@disable_for_loaddata
 def add_user_to_realtor_group(sender: Profile,
                               instance: Profile, **kwargs) -> None:
     if instance.profile_type == 'realtor':

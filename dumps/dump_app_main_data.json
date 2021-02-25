@@ -1,0 +1,976 @@
+[
+{
+    "model": "main.profile",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "profile_type": null,
+        "phone": null
+    }
+},
+{
+    "model": "main.profile",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "profile_type": null,
+        "phone": null
+    }
+},
+{
+    "model": "main.category",
+    "pk": 1,
+    "fields": {
+        "category_title": "Квартира в новостройке",
+        "category_slug": "new_building"
+    }
+},
+{
+    "model": "main.category",
+    "pk": 2,
+    "fields": {
+        "category_title": "Квартира во вторичке",
+        "category_slug": "resale"
+    }
+},
+{
+    "model": "main.category",
+    "pk": 3,
+    "fields": {
+        "category_title": "Дом",
+        "category_slug": "house"
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 1,
+    "fields": {
+        "advert_title": "Advert title 0",
+        "slug": "advert-slug-0",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.794Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 2,
+    "fields": {
+        "advert_title": "Advert title 1",
+        "slug": "advert-slug-1",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.818Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 3,
+    "fields": {
+        "advert_title": "Advert title 2",
+        "slug": "advert-slug-2",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.820Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 4,
+    "fields": {
+        "advert_title": "Advert title 3",
+        "slug": "advert-slug-3",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.821Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 5,
+    "fields": {
+        "advert_title": "Advert title 4",
+        "slug": "advert-slug-4",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.822Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 6,
+    "fields": {
+        "advert_title": "Advert title 5",
+        "slug": "advert-slug-5",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.823Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 7,
+    "fields": {
+        "advert_title": "Advert title 6",
+        "slug": "advert-slug-6",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.825Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 8,
+    "fields": {
+        "advert_title": "Advert title 7",
+        "slug": "advert-slug-7",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.826Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 9,
+    "fields": {
+        "advert_title": "Advert title 8",
+        "slug": "advert-slug-8",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.827Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 10,
+    "fields": {
+        "advert_title": "Advert title 9",
+        "slug": "advert-slug-9",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.828Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 11,
+    "fields": {
+        "advert_title": "Advert title 10",
+        "slug": "advert-slug-10",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.829Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 12,
+    "fields": {
+        "advert_title": "Advert title 11",
+        "slug": "advert-slug-11",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.831Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 13,
+    "fields": {
+        "advert_title": "Advert title 12",
+        "slug": "advert-slug-12",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.832Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 14,
+    "fields": {
+        "advert_title": "Advert title 13",
+        "slug": "advert-slug-13",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.833Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 15,
+    "fields": {
+        "advert_title": "Advert title 14",
+        "slug": "advert-slug-14",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.835Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 16,
+    "fields": {
+        "advert_title": "Advert title 15",
+        "slug": "advert-slug-15",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.836Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 17,
+    "fields": {
+        "advert_title": "Advert title 16",
+        "slug": "advert-slug-16",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.837Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 18,
+    "fields": {
+        "advert_title": "Advert title 17",
+        "slug": "advert-slug-17",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.838Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 19,
+    "fields": {
+        "advert_title": "Advert title 18",
+        "slug": "advert-slug-18",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:13:15.839Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 20,
+    "fields": {
+        "advert_title": "Advert title 19",
+        "slug": "advert-slug-19",
+        "advert_owner": null,
+        "advert_category": null,
+        "address": null,
+        "rooms": 2,
+        "price": 20000,
+        "area": 54,
+        "year": 2011,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:35.193Z",
+        "views": 1
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 21,
+    "fields": {
+        "advert_title": "Квартира 0",
+        "slug": "flat_0",
+        "advert_owner": 2,
+        "advert_category": 2,
+        "address": null,
+        "rooms": 2,
+        "price": 44000,
+        "area": 40,
+        "year": 1990,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:18.736Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 22,
+    "fields": {
+        "advert_title": "Квартира 1",
+        "slug": "flat_1",
+        "advert_owner": 2,
+        "advert_category": 2,
+        "address": null,
+        "rooms": 2,
+        "price": 44000,
+        "area": 40,
+        "year": 1990,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:19.000Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 23,
+    "fields": {
+        "advert_title": "Квартира 2",
+        "slug": "flat_2",
+        "advert_owner": 2,
+        "advert_category": 2,
+        "address": null,
+        "rooms": 2,
+        "price": 44000,
+        "area": 40,
+        "year": 1990,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:19.003Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 24,
+    "fields": {
+        "advert_title": "Квартира 3",
+        "slug": "flat_3",
+        "advert_owner": 2,
+        "advert_category": 2,
+        "address": null,
+        "rooms": 2,
+        "price": 44000,
+        "area": 40,
+        "year": 1990,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:19.005Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 25,
+    "fields": {
+        "advert_title": "Квартира 4",
+        "slug": "flat_4",
+        "advert_owner": 2,
+        "advert_category": 2,
+        "address": null,
+        "rooms": 2,
+        "price": 44000,
+        "area": 40,
+        "year": 1990,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:19.008Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 26,
+    "fields": {
+        "advert_title": "Квартира 5",
+        "slug": "flat_5",
+        "advert_owner": 2,
+        "advert_category": 2,
+        "address": null,
+        "rooms": 2,
+        "price": 44000,
+        "area": 40,
+        "year": 1990,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:19.010Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 27,
+    "fields": {
+        "advert_title": "Квартира 6",
+        "slug": "flat_6",
+        "advert_owner": 2,
+        "advert_category": 2,
+        "address": null,
+        "rooms": 2,
+        "price": 44000,
+        "area": 40,
+        "year": 1990,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:19.012Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 28,
+    "fields": {
+        "advert_title": "Квартира 7",
+        "slug": "flat_7",
+        "advert_owner": 2,
+        "advert_category": 2,
+        "address": null,
+        "rooms": 2,
+        "price": 44000,
+        "area": 40,
+        "year": 1990,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:19.015Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 29,
+    "fields": {
+        "advert_title": "Квартира 8",
+        "slug": "flat_8",
+        "advert_owner": 2,
+        "advert_category": 2,
+        "address": null,
+        "rooms": 2,
+        "price": 44000,
+        "area": 40,
+        "year": 1990,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:19.017Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 30,
+    "fields": {
+        "advert_title": "Квартира 9",
+        "slug": "flat_9",
+        "advert_owner": 2,
+        "advert_category": 2,
+        "address": null,
+        "rooms": 2,
+        "price": 44000,
+        "area": 40,
+        "year": 1990,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:19.019Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 31,
+    "fields": {
+        "advert_title": "Квартира 10",
+        "slug": "flat_10",
+        "advert_owner": 2,
+        "advert_category": 2,
+        "address": null,
+        "rooms": 2,
+        "price": 44000,
+        "area": 40,
+        "year": 1990,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:19.022Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 32,
+    "fields": {
+        "advert_title": "Квартира 11",
+        "slug": "flat_11",
+        "advert_owner": 2,
+        "advert_category": 2,
+        "address": null,
+        "rooms": 2,
+        "price": 44000,
+        "area": 40,
+        "year": 1990,
+        "building_type": "brick",
+        "created": "2021-02-25T09:52:19.024Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 33,
+    "fields": {
+        "advert_title": "Дом 0",
+        "slug": "house_0",
+        "advert_owner": 2,
+        "advert_category": 3,
+        "address": null,
+        "rooms": 4,
+        "price": 100000,
+        "area": 150,
+        "year": 2015,
+        "building_type": "brick",
+        "created": "2021-02-25T09:55:35.093Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 34,
+    "fields": {
+        "advert_title": "Дом 1",
+        "slug": "house_1",
+        "advert_owner": 2,
+        "advert_category": 3,
+        "address": null,
+        "rooms": 4,
+        "price": 100000,
+        "area": 150,
+        "year": 2015,
+        "building_type": "brick",
+        "created": "2021-02-25T09:55:35.098Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 35,
+    "fields": {
+        "advert_title": "Дом 2",
+        "slug": "house_2",
+        "advert_owner": 2,
+        "advert_category": 3,
+        "address": null,
+        "rooms": 4,
+        "price": 100000,
+        "area": 150,
+        "year": 2015,
+        "building_type": "brick",
+        "created": "2021-02-25T09:55:35.101Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 36,
+    "fields": {
+        "advert_title": "Дом 3",
+        "slug": "house_3",
+        "advert_owner": 2,
+        "advert_category": 3,
+        "address": null,
+        "rooms": 4,
+        "price": 100000,
+        "area": 150,
+        "year": 2015,
+        "building_type": "brick",
+        "created": "2021-02-25T09:55:35.104Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 37,
+    "fields": {
+        "advert_title": "Дом 4",
+        "slug": "house_4",
+        "advert_owner": 2,
+        "advert_category": 3,
+        "address": null,
+        "rooms": 4,
+        "price": 100000,
+        "area": 150,
+        "year": 2015,
+        "building_type": "brick",
+        "created": "2021-02-25T09:55:35.106Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 38,
+    "fields": {
+        "advert_title": "Дом 5",
+        "slug": "house_5",
+        "advert_owner": 2,
+        "advert_category": 3,
+        "address": null,
+        "rooms": 4,
+        "price": 100000,
+        "area": 150,
+        "year": 2015,
+        "building_type": "brick",
+        "created": "2021-02-25T09:55:35.109Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 39,
+    "fields": {
+        "advert_title": "Дом 6",
+        "slug": "house_6",
+        "advert_owner": 2,
+        "advert_category": 3,
+        "address": null,
+        "rooms": 4,
+        "price": 100000,
+        "area": 150,
+        "year": 2015,
+        "building_type": "brick",
+        "created": "2021-02-25T09:55:35.111Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 40,
+    "fields": {
+        "advert_title": "Дом 7",
+        "slug": "house_7",
+        "advert_owner": 2,
+        "advert_category": 3,
+        "address": null,
+        "rooms": 4,
+        "price": 100000,
+        "area": 150,
+        "year": 2015,
+        "building_type": "brick",
+        "created": "2021-02-25T09:55:35.113Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 41,
+    "fields": {
+        "advert_title": "Дом 8",
+        "slug": "house_8",
+        "advert_owner": 2,
+        "advert_category": 3,
+        "address": null,
+        "rooms": 4,
+        "price": 100000,
+        "area": 150,
+        "year": 2015,
+        "building_type": "brick",
+        "created": "2021-02-25T09:55:35.116Z",
+        "views": 0
+    }
+},
+{
+    "model": "main.advert",
+    "pk": 42,
+    "fields": {
+        "advert_title": "Дом 9",
+        "slug": "house_9",
+        "advert_owner": 2,
+        "advert_category": 3,
+        "address": null,
+        "rooms": 4,
+        "price": 100000,
+        "area": 150,
+        "year": 2015,
+        "building_type": "brick",
+        "created": "2021-02-25T09:55:50.538Z",
+        "views": 1
+    }
+},
+{
+    "model": "main.apartment",
+    "pk": 32,
+    "fields": {
+        "floors": 9,
+        "apartment_floor": 3
+    }
+},
+{
+    "model": "main.apartment",
+    "pk": 31,
+    "fields": {
+        "floors": 9,
+        "apartment_floor": 3
+    }
+},
+{
+    "model": "main.apartment",
+    "pk": 30,
+    "fields": {
+        "floors": 9,
+        "apartment_floor": 3
+    }
+},
+{
+    "model": "main.apartment",
+    "pk": 29,
+    "fields": {
+        "floors": 9,
+        "apartment_floor": 3
+    }
+},
+{
+    "model": "main.apartment",
+    "pk": 28,
+    "fields": {
+        "floors": 9,
+        "apartment_floor": 3
+    }
+},
+{
+    "model": "main.apartment",
+    "pk": 27,
+    "fields": {
+        "floors": 9,
+        "apartment_floor": 3
+    }
+},
+{
+    "model": "main.apartment",
+    "pk": 26,
+    "fields": {
+        "floors": 9,
+        "apartment_floor": 3
+    }
+},
+{
+    "model": "main.apartment",
+    "pk": 25,
+    "fields": {
+        "floors": 9,
+        "apartment_floor": 3
+    }
+},
+{
+    "model": "main.apartment",
+    "pk": 24,
+    "fields": {
+        "floors": 9,
+        "apartment_floor": 3
+    }
+},
+{
+    "model": "main.apartment",
+    "pk": 23,
+    "fields": {
+        "floors": 9,
+        "apartment_floor": 3
+    }
+},
+{
+    "model": "main.apartment",
+    "pk": 22,
+    "fields": {
+        "floors": 9,
+        "apartment_floor": 3
+    }
+},
+{
+    "model": "main.apartment",
+    "pk": 21,
+    "fields": {
+        "floors": 9,
+        "apartment_floor": 3
+    }
+},
+{
+    "model": "main.house",
+    "pk": 42,
+    "fields": {
+        "garage": true,
+        "plot": 0.0
+    }
+},
+{
+    "model": "main.house",
+    "pk": 41,
+    "fields": {
+        "garage": true,
+        "plot": 0.0
+    }
+},
+{
+    "model": "main.house",
+    "pk": 40,
+    "fields": {
+        "garage": true,
+        "plot": 0.0
+    }
+},
+{
+    "model": "main.house",
+    "pk": 39,
+    "fields": {
+        "garage": true,
+        "plot": 0.0
+    }
+},
+{
+    "model": "main.house",
+    "pk": 38,
+    "fields": {
+        "garage": true,
+        "plot": 0.0
+    }
+},
+{
+    "model": "main.house",
+    "pk": 37,
+    "fields": {
+        "garage": true,
+        "plot": 0.0
+    }
+},
+{
+    "model": "main.house",
+    "pk": 36,
+    "fields": {
+        "garage": true,
+        "plot": 0.0
+    }
+},
+{
+    "model": "main.house",
+    "pk": 35,
+    "fields": {
+        "garage": true,
+        "plot": 0.0
+    }
+},
+{
+    "model": "main.house",
+    "pk": 34,
+    "fields": {
+        "garage": true,
+        "plot": 0.0
+    }
+},
+{
+    "model": "main.house",
+    "pk": 33,
+    "fields": {
+        "garage": true,
+        "plot": 0.0
+    }
+}
+]
