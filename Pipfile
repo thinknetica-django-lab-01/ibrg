@@ -19,9 +19,6 @@ python-memcached = "*"
 django-debug-toolbar = "*"
 pytest-django = "*"
 flake8 = "*"
-channels = "*"
-channels-redis = "*"
-websocket-client = "*"
 
 [requires]
 python_version = "3.9"
