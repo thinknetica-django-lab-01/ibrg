@@ -119,6 +119,7 @@ class Advert(models.Model):
     )
     created = models.DateTimeField(auto_now=True)
     views = models.PositiveIntegerField(default=0)
+    active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = 'Объявление'

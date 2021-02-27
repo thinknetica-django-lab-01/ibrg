@@ -138,3 +138,5 @@ dmypy.json
 
 
 /docs/_build/html/_static/
+/main/migrations/
+/static/
