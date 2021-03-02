@@ -1,4 +1,4 @@
-import debug_toolbar
+# import debug_toolbar
 from django.contrib import admin
 from django.urls import include, path
 
@@ -12,5 +12,5 @@ urlpatterns = [
     # main
     path('chat/', include('chatbot.urls')),
     path('', include('main.urls')),
-    path('__debug__/', include(debug_toolbar.urls)),
+    # path('__debug__/', include(debug_toolbar.urls)),
 ]

@@ -1,0 +1,11 @@
+django
+django-ckeditor
+django-allauth
+celery
+redis
+django-redis
+python-memcached
+psycopg2-binary
+channels
+channels-redis
+websocket-client

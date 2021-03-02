@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: database
+    image: postgres:13.2
+    volumes: 
+      - postgres_data:/var/lib/postgresql/data/
+
+  redis:
+    image: redis:latest
+    container_name: redis_01
+    ports:
+      - '6379:6379'
+
+  celery:
+    build: .
+    command: celery -A main beat -l INFO
+    volumes:
+      - .:/usr/src/www/
+    links:
+      - redis
+  
+  django:
+    container_name: django_server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: marketplace
+    volumes:
+      - .:/usr/src/www/
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=marketplace_db
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - DB_PORT=5432
+    links:
+      - redis
+    depends_on:
+      - db
+      - celery
+
+volumes:
+  postgres_data:
