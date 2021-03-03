@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
+from django.contrib.postgres.fields import ArrayField
 
 from .constants import BUILDING_TYPE, PROFILE_TYPE
 
@@ -99,10 +100,10 @@ class Advert(models.Model):
         User, on_delete=models.CASCADE,
         verbose_name='Владелец объявления',
         null=True, blank=True)
-    advert_category = models.ForeignKey(
-        Category, on_delete=models.CASCADE,
-        verbose_name='Категория',
-        null=True, blank=True)
+    advert_category = ArrayField(
+        models.CharField(max_length=100),
+        verbose_name='Категории',
+        blank=True, null=True)
     address = models.CharField(
         max_length=255,
         verbose_name='Адрес дома',
@@ -119,7 +120,7 @@ class Advert(models.Model):
     )
     created = models.DateTimeField(auto_now=True)
     views = models.PositiveIntegerField(default=0)
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=True, null=True)
 
     class Meta:
         verbose_name = 'Объявление'

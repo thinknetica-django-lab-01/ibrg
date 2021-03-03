@@ -19,6 +19,7 @@ python-memcached = "*"
 django-debug-toolbar = "*"
 pytest-django = "*"
 flake8 = "*"
+python-decouple = "*"
 
 [requires]
 python_version = "3.9"

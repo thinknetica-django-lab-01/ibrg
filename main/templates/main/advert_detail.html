@@ -13,12 +13,13 @@
             <a href="{% url 'update_advert' object.slug %}" class="uk-button uk-button-primary">Изменить</a>
             {% endif %}
                 <article class="uk-article uk-padding">
-
                     <h1 class="uk-article-title">
                         {{ object.advert_title|capfirst }}
                     </h1>
-
-                    <p class="uk-article-meta">Written by <a href="#">Super User</a> on 12 April 2012. Posted in <a
+                    <p class="uk-article-meta">Категрии: {% for tag in object.advert_category %}
+                        <a class="uk-button-text" href="{% url 'adverts-list' tag  %}">{{ tag.title }}</a>,
+                    {% endfor %}
+                     on 12 April 2012. Posted in <a
                             href="#">Blog</a></p>
 
                     <p class="uk-text-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

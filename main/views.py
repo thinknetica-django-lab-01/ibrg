@@ -27,10 +27,10 @@ class AdvertListView(ListView):
         if not queryset:
             queryset = self.model.objects.all()
             cache.set('object_list', queryset)
-        if self.kwargs.get('category_slug'):
-            category = self.kwargs.get('category_slug')
+        if self.kwargs.get('tag'):
+            category = self.kwargs.get('tag')
             queryset = queryset.filter(
-                advert_category__category_slug=self.kwargs['category_slug'])
+                advert_category__icontains=self.kwargs['tag'])
             cache.set(f'object_list_{category}', queryset)
         return queryset
 

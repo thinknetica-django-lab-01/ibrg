@@ -15,7 +15,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('adverts/', AdvertListView.as_view(),
          name='adverts-list'),
-    path('<slug:category_slug>/', AdvertListView.as_view(),
+    path('<str:tag>/', AdvertListView.as_view(),
          name='adverts-list'),
     path('detail/<int:pk>/', AdvertDetailView.as_view(),
          name='advert-detail'),
