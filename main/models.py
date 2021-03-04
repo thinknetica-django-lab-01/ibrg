@@ -118,6 +118,7 @@ class Advert(models.Model):
         default=None,
         verbose_name='Тип дома'
     )
+    description = models.TextField()
     created = models.DateTimeField(auto_now=True)
     views = models.PositiveIntegerField(default=0)
     active = models.BooleanField(default=True, null=True)

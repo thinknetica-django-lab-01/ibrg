@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.contrib.postgres.search import SearchVector
 
 from .forms import ProfileForm, SubscribeForm, UserForm
 from .models import Advert, Apartment, House, User
@@ -24,9 +25,14 @@ class AdvertListView(ListView):
 
     def get_queryset(self) -> QuerySet[Advert]:
         queryset: 'QuerySet[Advert]' = cache.get('object_list')
+        query = self.request.GET.get('query', '')
         if not queryset:
             queryset = self.model.objects.all()
             cache.set('object_list', queryset)
+        if query:
+            queryset = self.model.objects.annotate(
+                search=SearchVector('advert_title', 'description'),
+            ).filter(search=query)
         if self.kwargs.get('tag'):
             category = self.kwargs.get('tag')
             queryset = queryset.filter(

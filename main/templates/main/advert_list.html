@@ -3,11 +3,24 @@
 {% block title %}Все объявления{% endblock %}
 
 {% block content %}
-    <div class="uk-container uk-container-large uk-margin-top">
-        <h4>Рекомендуем посмотреть</h4>
+    <div class="uk-container  uk-margin-top">
+        <div class="uk-clearfix">
+            <div class="uk-float-right">
+                <form class="uk-search uk-search-default" method="get">
+                    <span class="uk-search-icon-flip" uk-search-icon></span>
+                    <input class="uk-search-input" type="search" placeholder="Поиск" name='query'
+                           value='{{ request.GET.query }}'>
+                </form>
+
+            </div>
+            <div class="uk-float-left">
+                <h4>Рекомендуем посмотреть</h4>
+            </div>
+        </div>
+
         <ul class="uk-subnav uk-subnav-pill">
-        <li class="{% if request.path == '/adverts/' %} uk-active {% endif %}">
-            <a href="{% url 'adverts-list'  %}">Все</a> </li>
+            <li class="{% if request.path == '/adverts/' %} uk-active {% endif %}">
+                <a href="{% url 'adverts-list' %}">Все</a></li>
             {% for category in categories %}
                 <li class="{% if category.category_slug in request.path %} uk-active {% endif %}">
                     <a href="{% url 'adverts-list' category.category_slug %}">{{ category }}</a>
