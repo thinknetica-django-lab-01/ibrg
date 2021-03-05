@@ -171,3 +171,19 @@ class House(Advert):
 
     def __str__(self) -> str:
         return self.advert_title
+
+
+class UserAdvert(models.Model):
+
+    user_id = models.IntegerField()
+    username = models.CharField(verbose_name="Имя", max_length=50)
+    title = models.CharField(verbose_name="Название объекта", max_length=100)
+    description = models.TextField(verbose_name="Описание объекта")
+    tags = ArrayField(models.CharField(max_length=200), blank=True, default=list)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        managed = False
+        db_table = 'useradvert'
