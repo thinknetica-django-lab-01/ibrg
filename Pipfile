@@ -20,6 +20,7 @@ django-debug-toolbar = "*"
 pytest-django = "*"
 flake8 = "*"
 python-decouple = "*"
+sentry-sdk = "*"
 
 [requires]
 python_version = "3.9"
