@@ -21,7 +21,13 @@ from .permissions import RealtorPermissionMixin
 class AdvertListView(ListView):
     model = Advert
     paginate_by = 6
-    template_name = 'main/advert_list.html'
+
+    def get_template_names(self):
+        is_mobile = getattr(self.request, 'Mobile_Agent', False)
+
+        if is_mobile:
+            return 'mobile.html'
+        return 'main/advert_list.html'
 
     def get_queryset(self) -> QuerySet[Advert]:
         queryset: 'QuerySet[Advert]' = cache.get('object_list')
