@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 
+{% block metadata %}
+    <meta name="description" content="Напишите нам - база об аренде и продаже недвижимости.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Organization",
+      "name": "Cian",
+      "owns": {
+        "@type": "Person",
+        "name": "Mary Stone"
+      },
+      "url": "http://0.0.0.0:8000/",
+      "telephone": "( 33 1) 42 68 53 00"
+    }
+    </script>
+
+{% endblock %}
+
 {% block title %}
     {{ flatpage.title }}
 {%endblock title %}

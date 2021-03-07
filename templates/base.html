@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/uikit.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/uikit.css' %}"/>
     <style>
         body {background: #fcfcfc}
         input {padding: .7em; width: 100%}
         .uk-alert {position: fixed; top: 80px; right: 20%; z-index: 1}
     </style>
+    {% block metadata %}
+        <meta name="description" content="Ресурс о аренде и продаже недвижимости.">
+    {% endblock %}
 </head>
 <body>
 {% if messages %}

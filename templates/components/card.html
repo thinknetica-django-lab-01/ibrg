@@ -1,14 +1,22 @@
-<div>
-   <a href="{{ object.get_absolute_url }}">
-    <div class="uk-card uk-card-default">
-        <div class="uk-card-media-top">
-            <img src="https://getuikit.com/docs/images/light.jpg" alt="">
-        </div>
-        <div class="uk-card-body">
-            <h3 class="uk-card-title">{{ object.advert_title }} - <b>${{ object.price }}</b></h3>
-            <p>{{ object.rooms}}-комн., {{ object.area }} м<sup>2</sup> </p>
-        </div>
+<div itemtype="https://schema.org/Product">
+   <a href="{{ object.get_absolute_url }}" itemprop="url">
+        <div class="uk-card uk-card-default">
+
+            <div class="uk-card-media-top">
+                <img src="https://getuikit.com/docs/images/light.jpg" alt="" itemprop="image">
+            </div>
+
+            <div class="uk-card-body" itemprop="offers"  itemtype="https://schema.org/Offer">
+                <h3 class="uk-card-title" itemprop="name">{{ object.advert_title }}<h3>
+                    <span itemprop="price">${{ object.price }}</span>
+                <p itemprop="description">
+                    <span>{{ object.rooms}}-комн.,</span>
+                    <span>{{ object.area }} м<sup>2</sup></span>
+                </p>
+            </div>
+
         <span>Просмотрено: {{ object.views }}</span>
-    </div>
-       </a>
+
+        </div>
+    </a>
 </div>
