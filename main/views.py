@@ -12,6 +12,9 @@ from django.views.decorators.cache import cache_page
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.postgres.search import SearchVector
 
+from rest_framework import viewsets
+from .serializers import AdvertSerializer
+
 from .forms import ProfileForm, SubscribeForm, UserForm
 from .models import Advert, Apartment, House, User
 from .permissions import RealtorPermissionMixin
@@ -158,3 +161,12 @@ def subscribe(request: HttpRequest) -> \
     else:
         form = SubscribeForm()
     return render(request, 'main/subscribe.html', {'form': form})
+
+
+# API
+class AdvertViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Advert.objects.all()
+    serializer_class = AdvertSerializer

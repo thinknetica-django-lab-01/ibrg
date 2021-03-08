@@ -45,11 +45,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-
-
-    # 'django_apscheduler',
-    # 'django_celery_results',
     'channels',
+    'rest_framework',
     # 'debug_toolbar',
 
     # custom apps

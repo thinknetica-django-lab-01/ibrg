@@ -21,6 +21,7 @@ pytest-django = "*"
 flake8 = "*"
 python-decouple = "*"
 sentry-sdk = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.9"
