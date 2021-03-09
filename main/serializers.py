@@ -2,11 +2,11 @@ from rest_framework import serializers
 from .models import Advert
 
 
-class AdvertSerializer(serializers.HyperlinkedModelSerializer):
+class AdvertSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Advert
-        fields = ['url',
+        fields = ['id',
                   'advert_title',
                   'slug',
                   'advert_category',

@@ -12,7 +12,9 @@ from django.views.decorators.cache import cache_page
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.postgres.search import SearchVector
 
-from rest_framework import viewsets
+from rest_framework import generics
+from rest_framework.pagination import PageNumberPagination
+
 from .serializers import AdvertSerializer
 
 from .forms import ProfileForm, SubscribeForm, UserForm
@@ -164,9 +166,26 @@ def subscribe(request: HttpRequest) -> \
 
 
 # API
-class AdvertViewSet(viewsets.ModelViewSet):
+class SmallResultsSetPagination(PageNumberPagination):
+    page_size = 1
+    page_size_query_param = 'page_size'
+    max_page_size = 5
+
+
+class AdvertViewSet(generics.ListAPIView):
     """
     API endpoint that allows groups to be viewed or edited.
     """
-    queryset = Advert.objects.all()
     serializer_class = AdvertSerializer
+    pagination_class = SmallResultsSetPagination
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        queryset = Advert.objects.all()
+        query = self.request.query_params.get('query', None)
+        if query is not None:
+            queryset = queryset.filter(advert_title=query)
+        return queryset
