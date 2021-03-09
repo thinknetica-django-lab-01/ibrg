@@ -1,0 +1,111 @@
+openapi: 3.0.2
+
+info:
+  title: API Title
+  version: '1.0'
+
+servers:
+  - url: 'http://api.server.test/v1'
+
+components:
+  schemas:
+    Advert:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        advert_title:
+          type: string
+        address:
+          type: string
+        rooms:
+          type: integer
+          format: int64
+        price:
+          type: integer
+          format: int64
+        area:
+          type: integer
+          format: int64
+        building_type:
+          type: string
+        description:
+          type: string
+
+
+      required:
+        - id
+        - slug
+
+paths:
+  /adverts:
+    get:
+      tags:
+        - Adverts
+      summary: List all adverts
+      operationId: listAdvert
+      responses:
+        '200':
+          description: Successful operation
+  /detai/{id}:
+    get:
+      tags:
+        - Advert
+      description: Returns a single advert
+      operationId: getAdvertById
+      parameters:
+        - name: id
+          in: path
+          description: Advert ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Advert'
+        '404':
+          description: Not Found
+  /adverts/{slug}/:
+    put:
+      tags:
+        - Advert Edit
+      description: Update an existing advert
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid advert supplied
+          content: { }
+        '404':
+          description: Advert not found
+          content: { }
+  /adverts/apartment/:
+    post:
+      tags:
+        - Add Appartment
+      description: Creating a new apartment listing
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Invalid request data
+  /adverts/house/:
+    post:
+      tags:
+        - Add house
+      description: Creating a new housing listing
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Invalid request data
