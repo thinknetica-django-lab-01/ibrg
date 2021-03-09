@@ -71,7 +71,7 @@ paths:
                 $ref: '#/components/schemas/Advert'
         '404':
           description: Not Found
-  /adverts/update/{slug}/:
+  /adverts/{slug}/:
     put:
       tags:
         - Advert Edit
@@ -89,7 +89,7 @@ paths:
         '404':
           description: Advert not found
           content: { }
-  /adverts/add/apartment/:
+  /adverts/apartment/:
     post:
       tags:
         - Add Appartment
@@ -99,7 +99,7 @@ paths:
           description: Created
         '400':
           description: Invalid request data
-  /adverts/add/house/:
+  /adverts/house/:
     post:
       tags:
         - Add house
