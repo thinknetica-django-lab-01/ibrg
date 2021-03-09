@@ -12,7 +12,7 @@ from django.views.decorators.cache import cache_page
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.postgres.search import SearchVector
 
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from .serializers import AdvertSerializer
 
 from .forms import ProfileForm, SubscribeForm, UserForm
@@ -170,3 +170,4 @@ class AdvertViewSet(viewsets.ModelViewSet):
     """
     queryset = Advert.objects.all()
     serializer_class = AdvertSerializer
+    permission_classes = [permissions.IsAuthenticated]
