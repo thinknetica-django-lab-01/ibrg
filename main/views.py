@@ -12,8 +12,9 @@ from django.views.decorators.cache import cache_page
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.postgres.search import SearchVector
 
-from rest_framework import generics
+from rest_framework import permissions, viewsets
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import BasePermission, IsAuthenticatedOrReadOnly
 
 from .serializers import AdvertSerializer
 
@@ -172,18 +173,30 @@ class SmallResultsSetPagination(PageNumberPagination):
     max_page_size = 5
 
 
-class AdvertViewSet(generics.ListAPIView):
+class IsOwnerOrReadOnly(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        # Read permissions are allowed to any request,
+        # so we'll always allow GET, HEAD or OPTIONS requests.
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        return obj.advert_owner == request.user
+
+
+class AdvertViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
     serializer_class = AdvertSerializer
     pagination_class = SmallResultsSetPagination
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     def get_queryset(self):
         """
         Optionally restricts the returned purchases to a given user,
         by filtering against a `username` query parameter in the URL.
         """
+
         queryset = Advert.objects.all()
         query = self.request.query_params.get('query', None)
         if query is not None:
