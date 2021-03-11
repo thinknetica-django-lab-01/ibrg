@@ -1,18 +1,19 @@
 # import debug_toolbar
 from django.contrib import admin
-from django.urls import include, path, re_path
-
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
 from main.views import AdvertViewSet
 
+router = DefaultRouter()
+router.register(r'adverts', AdvertViewSet)
 
 urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('page/', include('django.contrib.flatpages.urls')),
     path('admin/', admin.site.urls),
     # API
-    re_path('^api/v1/adverts/(?P<query>.+)/$', AdvertViewSet.as_view()),
-    path('api/v1/adverts/', AdvertViewSet.as_view()),
+    path('api/v1/', include(router.urls)),
 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # accounts
