@@ -15,6 +15,7 @@ from django.contrib.postgres.search import SearchVector
 from rest_framework import permissions, viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import BasePermission, IsAuthenticatedOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .serializers import AdvertSerializer
 
@@ -187,18 +188,9 @@ class AdvertViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
+    queryset = Advert.objects.all()
     serializer_class = AdvertSerializer
     pagination_class = SmallResultsSetPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['advert_title', 'description', 'price']
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-
-    def get_queryset(self):
-        """
-        Optionally restricts the returned purchases to a given user,
-        by filtering against a `username` query parameter in the URL.
-        """
-
-        queryset = Advert.objects.all()
-        query = self.request.query_params.get('query', None)
-        if query is not None:
-            queryset = queryset.filter(advert_title=query)
-        return queryset
